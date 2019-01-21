@@ -96,6 +96,12 @@ https://www.amazon.com/Raspberry-Controller-Transmitter-Transceiver-Geekworm/dp/
 ### WINGONEER 38KHz IR Infrared Remote Control Transceiver Shield for Raspberry Pi 2 3 Module B
 https://www.amazon.com/WINGONEER-Infrared-Control-Transceiver-Raspberry/dp/B072QWXLK2
 
+### IR Board for Arduino
+SparkFun WiFi IR Blaster (ESP8266)
+https://www.sparkfun.com/products/15031
+#### software
+https://github.com/mdhiggins/ESP8266-HTTP-IR-Blaster
+
 ### GPIO
 
 #### pi_gpio_service
