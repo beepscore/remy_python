@@ -90,6 +90,9 @@ http://www.raspberrypiwiki.com/index.php/Raspberry_Pi_IR_Control_Expansion_Board
 ### Raspberry pi 3 B+ 38KHz IR Infrared Remote Expansion Board
 https://www.amazon.com/Raspberry-Controller-Transmitter-Transceiver-Geekworm/dp/B076BDR34K
 
+### WINGONEER 38KHz IR Infrared Remote Control Transceiver Shield for Raspberry Pi 2 3 Module B
+https://www.amazon.com/WINGONEER-Infrared-Control-Transceiver-Raspberry/dp/B072QWXLK2
+
 ### GPIO
 
 #### pi_gpio_service
