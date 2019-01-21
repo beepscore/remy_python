@@ -96,6 +96,15 @@ https://www.amazon.com/Raspberry-Controller-Transmitter-Transceiver-Geekworm/dp/
 ### WINGONEER 38KHz IR Infrared Remote Control Transceiver Shield for Raspberry Pi 2 3 Module B
 https://www.amazon.com/WINGONEER-Infrared-Control-Transceiver-Raspberry/dp/B072QWXLK2
 
+### Raspberry Pi Zero Universal Remote 2018
+https://www.instructables.com/id/Raspberry-Pi-Zero-Universal-Remote/
+#### parts list
+- IR LED 5mm (940nm) - TSAL6200 
+- 2N2222 NPN transistor 
+- r1 10k ohm 1/4 watt
+- r2 680 ohm
+- r3 36 ohm 1/4 watt
+
 ### IR Board for Arduino
 SparkFun WiFi IR Blaster (ESP8266)
 https://www.sparkfun.com/products/15031
