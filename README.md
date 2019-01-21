@@ -46,8 +46,13 @@ http://mattrichardson.com/Raspberry-Pi-Flask/
 ## Remote controls
 
 ### LIRC
+
 #### LIRC Linux Infrared Remote Control
 http://lirc.org/
+
+#### Raspberry Pi IR Remote Control
+2018, uses Go
+https://github.com/mtraver/rpi-ir-remote
 
 #### LIRC Debian Stretch Raspberry Pi 2018
 https://www.raspberrypi.org/forums/viewtopic.php?t=202375
@@ -76,6 +81,14 @@ http://alexba.in/blog/2013/06/08/open-source-universal-remote-parts-and-pictures
 ##### lirc_node
 lirc_node is an npm module that acts as a very thin shim between LIRC and Node.
 https://github.com/alexbain/lirc_node
+
+## IR board
+
+### Raspberry Pi IR Control Expansion Board
+http://www.raspberrypiwiki.com/index.php/Raspberry_Pi_IR_Control_Expansion_Board
+
+### Raspberry pi 3 B+ 38KHz IR Infrared Remote Expansion Board
+https://www.amazon.com/Raspberry-Controller-Transmitter-Transceiver-Geekworm/dp/B076BDR34K
 
 ### GPIO
 
