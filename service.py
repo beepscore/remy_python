@@ -25,8 +25,9 @@ def transmit_command(command):
     Note success indicates command was sent, not if any television received command
     """
 
-    # f string requires python >= 3.6
-    response = f'transmitted command {command}'
+    # TODO: Check python version is >= 3.6 before using f string.
+    # response = f'transmitted command {command}'
+    response = 'transmitted command {}'.format(command)
 
     # TODO: send command to infrared transmitter
     if command == "volume-decrease":
