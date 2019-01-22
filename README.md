@@ -2,7 +2,7 @@
 Make a Python app with two parts:
 - A Flask web service to accept television command requests (e.g. volume decrease, volume increase).
 - A way to send commands to a transmitter, which then transmits the commands to the television (e.g. via infrared light).
-The app may run on a Raspberry Pi with an attached infrared transmitter.
+The app may run on a Raspberry Pi with an attached infrared transmitter and use LIRC (Linux Infrared Remote Control).
 
 # Results
 
