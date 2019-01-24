@@ -31,6 +31,40 @@ e.g. use curl or iOS app
       libftdi102 liblirc0 python3-yaml
     Suggested packages:
       lirc-compat-remotes lirc-drv-irman lirc-doc lirc-x setserial ir-keytable
+
+Add the following content to /boot/config.txt
+
+    dtoverlay=lirc-rpi,gpio_in_pin=18,gpio_out_pin=17 
+    
+### lirc-compat-remotes (outdated)
+This package contains the remote definitions which were part of lirc up to 0.9.0.
+    
+### lirc-remotes
+https://sourceforge.net/projects/lirc-remotes/
+
+LIRC 0.9.4 does not use hardware.conf
+
+https://sourceforge.net/p/lirc/wiki/Drivers/
+
+I copied a lirc configuration file
+    pi@raspberrypi:/etc/lirc/lircd.conf.d $ sudo cp ~/beepscore/rpi-ir-remote/config/lirc/cxa_cxc_cxn.lircd.conf .
+
+Ran lirc command
+
+    irsend list cambridge_cxa ""
+
+    000000000000140c KEY_POWER
+    000000000000140e KEY_POWER_ON
+    000000000000140f KEY_POWER_OFF
+    000000000000140d KEY_MUTE
+    0000000000001432 KEY_MUTE_ON
+    0000000000001433 KEY_MUTE_OFF
+    0000000000001410 KEY_VOLUMEUP
+    0000000000001411 KEY_VOLUMEDOWN
+    
+#### execute a lirc command
+
+    irsend SEND_ONCE cambridge_cxa KEY_VOLUMEDOWN
     
 # References
 
