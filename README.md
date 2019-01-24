@@ -23,6 +23,32 @@ e.g. use curl or iOS app
 
     http://10.0.0.4:5000/api/v1/tv/volume-decrease/
     http://10.0.0.4:5000/api/v1/tv/volume-increase/
+    
+### start server
+cd to project directory
+
+    cd ~/beepscore/remy_python
+
+If using conda (e.g. via miniconda), activate environment
+
+    source activate beepscore
+    
+start flask
+
+    python3 service.py
+    * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+    * Restarting with stat
+
+now iphone on local network can see pi.
+
+GET request e.g. from mobile safari
+
+    10.0.0.4:5000/api/v1/tv/ping
+
+pi terminal shows caller's ip address e.g. iphone 10.0.0.3
+    
+    10.0.0.3 - - [23/Jan/2019 23:39:22] "POST /api/v1/tv/volume-decrease/ HTTP/1.1" 200 -
+    10.0.0.3 - - [23/Jan/2019 23:39:26] "POST /api/v1/tv/volume-increase/ HTTP/1.1" 200 -
 
 ## LIRC
 
