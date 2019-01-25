@@ -4,7 +4,11 @@
 and instruct a transmitter (e.g. infrared) to transmit command
 """
 
+# Enum requires Python >= 3.4
+from enum import Enum
+
 from flask import Flask, jsonify, request
+import subprocess
 
 # app is a flask object
 app = Flask(__name__)
@@ -16,6 +20,18 @@ VERSION_KEY = 'version'
 API_NAME = 'tv'
 VERSION = '1.0'
 
+# lirc commands
+IRSEND = 'irsend'
+SEND_ONCE = 'SEND_ONCE'
+
+# TODO: find correct remote control configuration file, use with LIRC.
+IR_REMOTE = 'cambridge_cxa'
+
+
+class IrCommand(Enum):
+    KEY_VOLUMEDOWN = 'KEY_VOLUMEDOWN'
+    KEY_VOLUMEUP = 'KEY_VOLUMEUP'
+
 
 def transmit_command(command):
     """
@@ -25,15 +41,16 @@ def transmit_command(command):
     Note success indicates command was sent, not if any television received command
     """
 
-    # TODO: Check python version is >= 3.6 before using f string.
+    # f string requires Python >= 3.6, so don't use it yet.
     # response = f'transmitted command {command}'
     response = 'transmitted command {}'.format(command)
 
-    # TODO: send command to infrared transmitter
     if command == "volume-decrease":
-        pass
+        # subprocess.run requires Python >= 3.5
+        # Don't allow user to run arbitrary string input, that is a security risk.
+        subprocess.run([IRSEND, SEND_ONCE, IR_REMOTE, IrCommand.KEY_VOLUMEDOWN])
     elif command == "volume-increase":
-        pass
+        subprocess.run([IRSEND, SEND_ONCE, IR_REMOTE, IrCommand.KEY_VOLUMEUP])
 
     data = {API_NAME_KEY: API_NAME,
             VERSION_KEY: VERSION,
