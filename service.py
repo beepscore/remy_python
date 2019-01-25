@@ -46,11 +46,12 @@ def transmit_command(command):
     response = 'transmitted command {}'.format(command)
 
     if command == "volume-decrease":
-        # subprocess.run requires Python >= 3.5
+        # subprocess.run requires Python >= 3.5, so don't use it yet.
         # Don't allow user to run arbitrary string input, that is a security risk.
-        subprocess.run([IRSEND, SEND_ONCE, IR_REMOTE, IrCommand.KEY_VOLUMEDOWN])
+        # subprocess.run([IRSEND, SEND_ONCE, IR_REMOTE, IrCommand.KEY_VOLUMEDOWN])
+        subprocess.call([IRSEND, SEND_ONCE, IR_REMOTE, IrCommand.KEY_VOLUMEDOWN])
     elif command == "volume-increase":
-        subprocess.run([IRSEND, SEND_ONCE, IR_REMOTE, IrCommand.KEY_VOLUMEUP])
+        subprocess.call([IRSEND, SEND_ONCE, IR_REMOTE, IrCommand.KEY_VOLUMEUP])
 
     data = {API_NAME_KEY: API_NAME,
             VERSION_KEY: VERSION,
