@@ -24,7 +24,7 @@ VERSION = '1.0'
 IRSEND = 'irsend'
 SEND_ONCE = 'SEND_ONCE'
 
-# TODO: find correct remote control configuration file, use with LIRC.
+# use LIRC remote control configuration file /etc/lirc/lircd.conf.d/polk.lirc.conf
 IR_REMOTE = 'polk'
 
 
