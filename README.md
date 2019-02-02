@@ -105,31 +105,45 @@ To disable a file change extension from .conf to e.g. .dist
     sudo mv devinput.lircd.conf devinput.lircd.dist
     
 ### irrecord
+http://www.lirc.org/html/irrecord.html
+
 lirc-remotes has lots of files, but none named polk.
 Could try existing ones but this could be time consuming.
 Instead record existing physical remote.
 
     
-#### needed to stop lirc daemon
+#### error need to stop lirc daemon
 
     irrecord -d /dev/lirc0 ~/lircd.conf
+    
     Using driver default on device /dev/lirc0
     Could not init hardware (lircd running ? --> close it, check permissions)
     
-    htop, ^C
+##### view running processes
+
+    htop
+    ^C
+
+##### stop lirc daemon process by name
+
     sudo killall -9 lircd
     
-##### irrecord -d didn't work with polk remote, never got enough info to make a .conf file.
+##### irrecord -d didn't work with polk remote, it never got enough info to make a .conf file.
     
     irrecord -d /dev/lirc0 ~/lircd.conf
 
-##### Used option -f to create a conf file
+##### fix recording failing using option -f --force raw mode
 
     irrecord -f -d /dev/lirc0 ~/polk.lircd.conf
 
 Enter valid key names e.g. KEY_VOLUMEDOWN
     
 Copied file to /etc/lirc/lircd.conf.d/polk.lircd.conf
+
+### add more keys using option -u --update
+
+    cd /etc/lirc/lircd.conf.d
+    irrecord -f -u ./polk.lircd.conf
 
 # References
 
