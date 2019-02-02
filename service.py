@@ -29,6 +29,7 @@ IR_REMOTE = 'polk'
 
 
 class IrCommand(Enum):
+    KEY_MUTE = 'KEY_MUTE'
     KEY_VOLUMEDOWN = 'KEY_VOLUMEDOWN'
     KEY_VOLUMEUP = 'KEY_VOLUMEUP'
     KEY_UP = 'KEY_UP'
@@ -51,6 +52,7 @@ def transmit_command(command):
     #
     # If LIRC irsend isn't installed, throws error:
     # FileNotFoundError: [Errno 2] No such file or directory: 'irsend': 'irsend'
+    # Can run unit tests on macOS by temporarily disabling subprocess.call(IRSEND...)
     #
     # subprocess.run requires Python >= 3.5, so don't use it yet.
     # subprocess.run([IRSEND, SEND_ONCE, IR_REMOTE, IrCommand.KEY_VOLUMEDOWN.value])
@@ -82,6 +84,11 @@ def api_status():
 # https://stackoverflow.com/questions/10302179/hyphen-underscore-or-camelcase-as-word-delimiter-in-uris#18450653
 
 # POST but not GET because GET should not change any state on the server
+
+@app.route("/api/v1/tv/mute/", methods=['POST'])
+def mute():
+    return transmit_command(IrCommand.KEY_MUTE)
+
 
 @app.route("/api/v1/tv/voice-decrease/", methods=['POST'])
 def voice_decrease():
