@@ -36,22 +36,23 @@ class IrCommand(Enum):
 def transmit_command(command):
     """
     instruct infrared transmitter to transmit command
-    :parameter command: a string. # TODO: consider use an enum
+    :parameter command: an IrCommand with a .value of type String.
     :return: data dictionary with status 'success'
     Note success indicates command was sent, not if any television received command
     """
 
     # f string requires Python >= 3.6, so don't use it yet.
     # response = f'transmitted command {command}'
-    response = 'transmitted command {}'.format(command)
+    response = 'transmitted command {}'.format(command.value)
 
-    if command == "volume-decrease":
-        # subprocess.run requires Python >= 3.5, so don't use it yet.
-        # Don't allow user to run arbitrary string input, that is a security risk.
-        # subprocess.run([IRSEND, SEND_ONCE, IR_REMOTE, IrCommand.KEY_VOLUMEDOWN.value])
-        subprocess.call([IRSEND, SEND_ONCE, IR_REMOTE, IrCommand.KEY_VOLUMEDOWN.value])
-    elif command == "volume-increase":
-        subprocess.call([IRSEND, SEND_ONCE, IR_REMOTE, IrCommand.KEY_VOLUMEUP.value])
+    # Don't allow user to run arbitrary string input, that is a security risk.
+    #
+    # If LIRC irsend isn't installed, throws error:
+    # FileNotFoundError: [Errno 2] No such file or directory: 'irsend': 'irsend'
+    #
+    # subprocess.run requires Python >= 3.5, so don't use it yet.
+    # subprocess.run([IRSEND, SEND_ONCE, IR_REMOTE, IrCommand.KEY_VOLUMEDOWN.value])
+    subprocess.call([IRSEND, SEND_ONCE, IR_REMOTE, command.value])
 
     data = {API_NAME_KEY: API_NAME,
             VERSION_KEY: VERSION,
@@ -81,12 +82,12 @@ def api_status():
 # POST but not GET because GET should not change any state on the server
 @app.route("/api/v1/tv/volume-decrease/", methods=['POST'])
 def volume_decrease():
-    return transmit_command("volume-decrease")
+    return transmit_command(IrCommand.KEY_VOLUMEDOWN)
 
 
 @app.route("/api/v1/tv/volume-increase/", methods=['POST'])
 def volume_increase():
-    return transmit_command("volume-increase")
+    return transmit_command(IrCommand.KEY_VOLUMEUP)
 
 
 if __name__ == '__main__':

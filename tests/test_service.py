@@ -2,7 +2,7 @@
 
 import unittest
 from flask import Flask
-from service import transmit_command
+from service import IrCommand, transmit_command
 
 
 class TestTvService(unittest.TestCase):
@@ -16,11 +16,11 @@ class TestTvService(unittest.TestCase):
 
         json_expected = {'api_name': 'tv',
                          'version': '1.0',
-                         'response': 'transmitted command volume-decrease'}
+                         'response': 'transmitted command KEY_VOLUMEDOWN'}
 
         # call method under test
         # http://flask.pocoo.org/docs/0.12/api/#response-objects
-        response = transmit_command('volume-decrease')
+        response = transmit_command(IrCommand.KEY_VOLUMEDOWN)
 
         self.assertEqual(len(response.headers), 2)
         self.assertEqual(response.status, '200 OK')
@@ -31,11 +31,11 @@ class TestTvService(unittest.TestCase):
 
         json_expected = {'api_name': 'tv',
                          'version': '1.0',
-                         'response': 'transmitted command volume-increase'}
+                         'response': 'transmitted command KEY_VOLUMEUP'}
 
         # call method under test
         # http://flask.pocoo.org/docs/0.12/api/#response-objects
-        response = transmit_command('volume-increase')
+        response = transmit_command(IrCommand.KEY_VOLUMEUP)
 
         self.assertEqual(len(response.headers), 2)
         self.assertEqual(response.status, '200 OK')
