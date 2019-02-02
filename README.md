@@ -60,7 +60,7 @@ pi terminal shows caller's ip address e.g. iphone 10.0.0.3
 
 Add the following content to /boot/config.txt
 
-    dtoverlay=lirc-rpi,gpio_in_pin=18,gpio_out_pin=17 
+    dtoverlay=lirc-rpi,gpio_in_pin=18,gpio_out_pin=17
     
 ### lirc-compat-remotes (outdated)
 This package contains the remote definitions which were part of lirc up to 0.9.0.
