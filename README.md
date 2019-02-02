@@ -75,7 +75,7 @@ https://sourceforge.net/p/lirc/wiki/Drivers/
 I copied a lirc configuration file
     pi@raspberrypi:/etc/lirc/lircd.conf.d $ sudo cp ~/beepscore/rpi-ir-remote/config/lirc/cxa_cxc_cxn.lircd.conf .
 
-Ran lirc command
+Ran lirc command irsend
 
     irsend list cambridge_cxa ""
 
@@ -91,7 +91,46 @@ Ran lirc command
 #### execute a lirc command
 
     irsend SEND_ONCE cambridge_cxa KEY_VOLUMEDOWN
+
+The front facing camera on iPhone doesn't filter IR.
+It showed the raspberry pi is lighting the transmit infrared LED.
+However the remote configuration cambridge_cxa doesn't work with my Polk receiver.
     
+#### Disable incorrect remote configuration files
+https://learn.adafruit.com/using-an-ir-remote-with-a-raspberry-pi-media-center/using-other-remotes
+lirc looks in .conf.d directory for files ending in .conf
+To disable a file change extension from .conf to e.g. .dist
+
+    cd /etc/lirc/lircd.conf.d
+    sudo mv devinput.lircd.conf devinput.lircd.dist
+    
+### irrecord
+lirc-remotes has lots of files, but none named polk.
+Could try existing ones but this could be time consuming.
+Instead record existing physical remote.
+
+    
+#### needed to stop lirc daemon
+
+    irrecord -d /dev/lirc0 ~/lircd.conf
+    Using driver default on device /dev/lirc0
+    Could not init hardware (lircd running ? --> close it, check permissions)
+    
+    htop, ^C
+    sudo killall -9 lircd
+    
+##### irrecord -d didn't work with polk remote, never got enough info to make a .conf file.
+    
+    irrecord -d /dev/lirc0 ~/lircd.conf
+
+##### Used option -f to create a conf file
+
+    irrecord -f -d /dev/lirc0 ~/polk.lircd.conf
+
+Enter valid key names e.g. KEY_VOLUMEDOWN
+    
+Copied file to /etc/lirc/lircd.conf.d/polk.lircd.conf
+
 # References
 
 ## Remy
