@@ -25,7 +25,7 @@ IRSEND = 'irsend'
 SEND_ONCE = 'SEND_ONCE'
 
 # TODO: find correct remote control configuration file, use with LIRC.
-IR_REMOTE = 'cambridge_cxa'
+IR_REMOTE = 'polk'
 
 
 class IrCommand(Enum):
