@@ -31,6 +31,8 @@ IR_REMOTE = 'polk'
 class IrCommand(Enum):
     KEY_VOLUMEDOWN = 'KEY_VOLUMEDOWN'
     KEY_VOLUMEUP = 'KEY_VOLUMEUP'
+    KEY_UP = 'KEY_UP'
+    KEY_DOWN = 'KEY_DOWN'
 
 
 def transmit_command(command):
@@ -80,6 +82,17 @@ def api_status():
 # https://stackoverflow.com/questions/10302179/hyphen-underscore-or-camelcase-as-word-delimiter-in-uris#18450653
 
 # POST but not GET because GET should not change any state on the server
+
+@app.route("/api/v1/tv/voice-decrease/", methods=['POST'])
+def voice_decrease():
+    return transmit_command(IrCommand.KEY_DOWN)
+
+
+@app.route("/api/v1/tv/voice-increase/", methods=['POST'])
+def voice_increase():
+    return transmit_command(IrCommand.KEY_UP)
+
+
 @app.route("/api/v1/tv/volume-decrease/", methods=['POST'])
 def volume_decrease():
     return transmit_command(IrCommand.KEY_VOLUMEDOWN)
