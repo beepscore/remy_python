@@ -171,9 +171,6 @@ https://github.com/mtraver/rpi-ir-remote
 ### LIRC Debian Stretch Raspberry Pi 2018
 https://www.raspberrypi.org/forums/viewtopic.php?t=202375
 
-### pylirc
-https://github.com/project-owner/Peppy.doc/wiki/Pylirc
-
 ### How to get LIRC running on the Raspberry Pi 2017
 https://andicelabs.com/2017/11/lirc-raspberry-pi/
 
@@ -191,6 +188,9 @@ http://opensourceuniversalremote.com/
 
 ### Open Source Universal Remote - Parts & Pictures 2013
 http://alexba.in/blog/2013/06/08/open-source-universal-remote-parts-and-pictures/
+
+### pylirc
+https://github.com/project-owner/Peppy.doc/wiki/Pylirc
 
 ### lirc_node
 lirc_node is an npm module that acts as a very thin shim between LIRC and Node.
