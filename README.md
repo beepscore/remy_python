@@ -145,6 +145,10 @@ Copied file to /etc/lirc/lircd.conf.d/polk.lircd.conf
     cd /etc/lirc/lircd.conf.d
     irrecord -f -u ./polk.lircd.conf
 
+### list valid key names
+
+    irrecord --list-namespace
+    
 ## unit tests
 Can run tests on macOS by temporarily disabling service.py subprocess.call(irsend)
 Not sure how to run tests on pi yet.
