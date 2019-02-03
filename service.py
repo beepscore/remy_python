@@ -21,6 +21,14 @@ API_NAME = 'tv'
 VERSION = '1.0'
 
 
+def route(command):
+    """
+    :param command: a RemoteCommand
+    :return: route string
+    """
+    return "/api/v1/{}/{}/".format(API_NAME, command.value)
+
+
 def transmit_command(command):
     """
     instruct infrared transmitter to transmit command
@@ -61,27 +69,27 @@ def api_status():
 
 # POST but not GET because GET should not change any state on the server
 
-@app.route("/api/v1/tv/{}/.format(RemoteCommand.MUTE.value)", methods=['POST'])
+@app.route(route(RemoteCommand.MUTE), methods=['POST'])
 def mute():
     return transmit_command(RemoteCommand.MUTE)
 
 
-@app.route("/api/v1/tv/{}/.format(RemoteCommand.VOICE_DECREASE.value)", methods=['POST'])
+@app.route(route(RemoteCommand.VOICE_DECREASE), methods=['POST'])
 def voice_decrease():
     return transmit_command(RemoteCommand.VOICE_DECREASE)
 
 
-@app.route("/api/v1/tv/{}/.format(RemoteCommand.VOICE_INCREASE.value)", methods=['POST'])
+@app.route(route(RemoteCommand.VOICE_INCREASE), methods=['POST'])
 def voice_increase():
     return transmit_command(RemoteCommand.VOICE_INCREASE)
 
 
-@app.route("/api/v1/tv/{}/.format(RemoteCommand.VOLUME_DECREASE.value)", methods=['POST'])
+@app.route(route(RemoteCommand.VOLUME_DECREASE), methods=['POST'])
 def volume_decrease():
     return transmit_command(RemoteCommand.VOLUME_DECREASE)
 
 
-@app.route("/api/v1/tv/{}/.format(RemoteCommand.VOLUME_INCREASE.value)", methods=['POST'])
+@app.route(route(RemoteCommand.VOLUME_INCREASE), methods=['POST'])
 def volume_increase():
     return transmit_command(RemoteCommand.VOLUME_INCREASE)
 
