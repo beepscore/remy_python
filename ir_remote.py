@@ -1,6 +1,6 @@
 #!/usr/bin/env/python3
 
-""" Instructs a transmitter (e.g. infrared) to transmit a command
+""" Instructs an infrared transmitter to transmit a command
 """
 from remote_command import RemoteCommand
 
