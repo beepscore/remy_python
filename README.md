@@ -51,6 +51,7 @@ pi terminal shows caller's ip address e.g. iphone 10.0.0.3
     10.0.0.3 - - [23/Jan/2019 23:39:26] "POST /api/v1/tv/volume-increase/ HTTP/1.1" 200 -
 
 ## LIRC
+Raspberry Pi IR Remote Control https://github.com/mtraver/rpi-ir-remote has helpful up to date suggestions for configuring current versions of LIRC (0.94) and Raspbian (Stretch) and warnings about outdated online info.
 
     sudo apt-get install lirc
     The following additional packages will be installed:
