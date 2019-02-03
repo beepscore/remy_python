@@ -15,7 +15,11 @@ IR_REMOTE = 'polk'
 
 
 def ir_command(command):
-    # values from LIRC remote control configuration file /etc/lirc/lircd.conf.d/polk.lirc.conf
+    """
+    :parameter command: a RemoteCommand
+    :return: command string for infrared remote
+    values from LIRC remote control configuration file /etc/lirc/lircd.conf.d/polk.lirc.conf
+    """
     command_dict = {
         RemoteCommand.MUTE: 'KEY_MUTE',
         RemoteCommand.POWER: 'KEY_POWER',
