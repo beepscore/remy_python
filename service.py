@@ -57,7 +57,7 @@ def transmit_command(command):
 # home http://127.0.0.1
 # port :5000
 @app.route('/')
-@app.route("/api/v1/tv/ping/", methods=['GET'])
+@app.route("/api/v1/{}/ping/".format(API_NAME), methods=['GET'])
 def api_status():
     if request.method == 'GET':
         data = {API_NAME_KEY: API_NAME,
