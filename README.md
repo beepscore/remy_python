@@ -165,8 +165,7 @@ https://github.com/beepscore/Remy
 
 ## Similar remote control projects
 
-### Raspberry Pi IR Remote Control
-2018, uses Go
+### Raspberry Pi IR Remote Control 2018, uses Go
 https://github.com/mtraver/rpi-ir-remote
 
 ### LIRC Debian Stretch Raspberry Pi 2018
@@ -197,8 +196,34 @@ http://alexba.in/blog/2013/06/08/open-source-universal-remote-parts-and-pictures
 lirc_node is an npm module that acts as a very thin shim between LIRC and Node.
 https://github.com/alexbain/lirc_node
 
-### LIRC Linux Infrared Remote Control
+## LIRC Linux Infrared Remote Control
 http://lirc.org/
+
+## Infrared remote control hardware
+
+### Raspberry Pi IR Control Expansion Board
+http://www.raspberrypiwiki.com/index.php/Raspberry_Pi_IR_Control_Expansion_Board
+
+### Icstation 38KHz IR Infrared Remote Control Transceiver Shield for Raspberry Pi 2 3 Module B B+
+https://www.amazon.com/IR-Remote-Control-Transceiver-Raspberry/dp/B0713SK7RJ/ref=pd_cp_147_1?pd_rd_w=nydwe&pf_rd_p=ef4dc990-a9ca-4945-ae0b-f8d549198ed6&pf_rd_r=NPTQR2NR66SZXGEC1CFF&pd_rd_r=dc222ec9-1d1f-11e9-82b3-7117715d74e2&pd_rd_wg=OnVSD&pd_rd_i=B0713SK7RJ&psc=1&refRID=NPTQR2NR66SZXGEC1CFF
+
+### Raspberry Pi IR Control Expansion Board
+http://www.raspberrypiwiki.com/index.php/Raspberry_Pi_IR_Control_Expansion_Board
+
+### Raspberry pi 3 B+ 38KHz IR Infrared Remote Expansion Board
+https://www.amazon.com/Raspberry-Controller-Transmitter-Transceiver-Geekworm/dp/B076BDR34K
+
+### WINGONEER 38KHz IR Infrared Remote Control Transceiver Shield for Raspberry Pi 2 3 Module B
+https://www.amazon.com/WINGONEER-Infrared-Control-Transceiver-Raspberry/dp/B072QWXLK2
+
+### Raspberry Pi Zero Universal Remote 2018
+https://www.instructables.com/id/Raspberry-Pi-Zero-Universal-Remote/
+
+### IR Board for Arduino
+SparkFun WiFi IR Blaster (ESP8266)
+https://www.sparkfun.com/products/15031
+#### ir blaster software
+https://github.com/mdhiggins/ESP8266-HTTP-IR-Blaster
 
 ## Flask
 
@@ -214,38 +239,6 @@ http://mattrichardson.com/Raspberry-Pi-Flask/
 
 ### Using a Raspberry Pi to end an iPhone phone call
 http://beepscore.com/using-raspberry-pi-to-end-iphone-phone-call/
-
-## Infrared remote control hardware
-
-### Raspberry Pi IR Control Expansion Board
-http://www.raspberrypiwiki.com/index.php/Raspberry_Pi_IR_Control_Expansion_Board
-
-### Icstation 38KHz IR Infrared Remote Control Transceiver Shield for Raspberry Pi 2 3 Module B B+ 
-https://www.amazon.com/IR-Remote-Control-Transceiver-Raspberry/dp/B0713SK7RJ/ref=pd_cp_147_1?pd_rd_w=nydwe&pf_rd_p=ef4dc990-a9ca-4945-ae0b-f8d549198ed6&pf_rd_r=NPTQR2NR66SZXGEC1CFF&pd_rd_r=dc222ec9-1d1f-11e9-82b3-7117715d74e2&pd_rd_wg=OnVSD&pd_rd_i=B0713SK7RJ&psc=1&refRID=NPTQR2NR66SZXGEC1CFF
-
-### Raspberry Pi IR Control Expansion Board
-http://www.raspberrypiwiki.com/index.php/Raspberry_Pi_IR_Control_Expansion_Board
-
-### Raspberry pi 3 B+ 38KHz IR Infrared Remote Expansion Board
-https://www.amazon.com/Raspberry-Controller-Transmitter-Transceiver-Geekworm/dp/B076BDR34K
-
-### WINGONEER 38KHz IR Infrared Remote Control Transceiver Shield for Raspberry Pi 2 3 Module B
-https://www.amazon.com/WINGONEER-Infrared-Control-Transceiver-Raspberry/dp/B072QWXLK2
-
-### Raspberry Pi Zero Universal Remote 2018
-https://www.instructables.com/id/Raspberry-Pi-Zero-Universal-Remote/
-#### parts list
-- IR LED 5mm (940nm) - TSAL6200 
-- 2N2222 NPN transistor 
-- r1 10k ohm 1/4 watt
-- r2 680 ohm
-- r3 36 ohm 1/4 watt
-
-### IR Board for Arduino
-SparkFun WiFi IR Blaster (ESP8266)
-https://www.sparkfun.com/products/15031
-#### ir blaster software
-https://github.com/mdhiggins/ESP8266-HTTP-IR-Blaster
 
 ## Raspberry Pi GPIO projects
 
