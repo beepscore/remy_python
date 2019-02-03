@@ -1,54 +1,14 @@
 # Purpose
-Make a Python app with two parts:
-- A Flask web service to accept television command requests (e.g. volume decrease, volume increase).
-- A way to send commands to a transmitter, which then transmits the commands to the television (e.g. via infrared light).
+Make a Raspberry Pi infrared remote control.
+The device can programmatically control television sound bar audio volume.
+The Raspberry Pi uses LIRC (Linux Infrared Remote Control) to send commands to an attached infrared transmitter.
 
-The app may run on a Raspberry Pi with an attached infrared transmitter and use LIRC (Linux Infrared Remote Control).
+The Python app has two parts:
+
+- Functions to send commands to the infrared transmitter, which then transmits the commands to the television sound bar
+- A Flask web service to accept television command requests (e.g. volume decrease, volume increase).
 
 # Results
-
-## Python Flask web service
-
-### endpoints
-
-#### GET
-e.g. use client browser or curl
-
-    http://10.0.0.4:5000/api/v1/tv/ping/
-    http://10.0.0.4:5000/api/v1/tv/status/
-
-#### POST
-Send a television command
-e.g. use curl or iOS app
-
-    http://10.0.0.4:5000/api/v1/tv/volume-decrease/
-    http://10.0.0.4:5000/api/v1/tv/volume-increase/
-    
-### start server
-cd to project directory
-
-    cd ~/beepscore/remy_python
-
-If using conda (e.g. via miniconda), activate environment
-
-    source activate beepscore
-    
-start flask
-
-    python3 service.py
-    * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
-    * Restarting with stat
-
-now iphone on local network can see pi.
-
-GET request e.g. from mobile safari
-
-    10.0.0.4:5000/api/v1/tv/ping
-
-pi terminal shows caller's ip address e.g. iphone 10.0.0.3
-    
-    10.0.0.3 - - [23/Jan/2019 23:39:22] "POST /api/v1/tv/volume-decrease/ HTTP/1.1" 200 -
-    10.0.0.3 - - [23/Jan/2019 23:39:26] "POST /api/v1/tv/volume-increase/ HTTP/1.1" 200 -
 
 ## LIRC
 Raspberry Pi IR Remote Control https://github.com/mtraver/rpi-ir-remote has helpful up to date suggestions for configuring current versions of LIRC (0.94) and Raspbian (Stretch) and warnings about outdated online info.
@@ -150,6 +110,49 @@ Copied file to /etc/lirc/lircd.conf.d/polk.lircd.conf
 
     irrecord --list-namespace
     
+## Python Flask web service
+
+### endpoints
+
+#### GET
+e.g. use client browser or curl
+
+    http://10.0.0.4:5000/api/v1/tv/ping/
+    http://10.0.0.4:5000/api/v1/tv/status/
+
+#### POST
+Send a television command
+e.g. use curl or iOS app
+
+    http://10.0.0.4:5000/api/v1/tv/volume-decrease/
+    http://10.0.0.4:5000/api/v1/tv/volume-increase/
+    
+### start server
+cd to project directory
+
+    cd ~/beepscore/remy_python
+
+If using conda (e.g. via miniconda), activate environment
+
+    source activate beepscore
+    
+start flask
+
+    python3 service.py
+    * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+    * Restarting with stat
+
+now iphone on local network can see pi.
+
+GET request e.g. from mobile safari
+
+    10.0.0.4:5000/api/v1/tv/ping
+
+pi terminal shows caller's ip address e.g. iphone 10.0.0.3
+    
+    10.0.0.3 - - [23/Jan/2019 23:39:22] "POST /api/v1/tv/volume-decrease/ HTTP/1.1" 200 -
+    10.0.0.3 - - [23/Jan/2019 23:39:26] "POST /api/v1/tv/volume-increase/ HTTP/1.1" 200 -
+
 ## unit tests
 Can run tests on macOS by temporarily disabling service.py subprocess.call(irsend)
 Not sure how to run tests on pi yet.
