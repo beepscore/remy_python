@@ -72,14 +72,13 @@ lirc-remotes has lots of files, but none named polk.
 Could try existing ones but this could be time consuming.
 Instead record existing physical remote.
 
-    
 #### error need to stop lirc daemon
 
     irrecord -d /dev/lirc0 ~/lircd.conf
-    
+
     Using driver default on device /dev/lirc0
     Could not init hardware (lircd running ? --> close it, check permissions)
-    
+
 ##### view running processes
 
     htop
@@ -88,9 +87,9 @@ Instead record existing physical remote.
 ##### stop lirc daemon process by name
 
     sudo killall -9 lircd
-    
+
 ##### irrecord -d didn't work with polk remote, it never got enough info to make a .conf file.
-    
+
     irrecord -d /dev/lirc0 ~/lircd.conf
 
 ##### fix recording failing using option -f --force raw mode
@@ -98,7 +97,7 @@ Instead record existing physical remote.
     irrecord -f -d /dev/lirc0 ~/polk.lircd.conf
 
 Enter valid key names e.g. KEY_VOLUMEDOWN
-    
+
 Copied file to /etc/lirc/lircd.conf.d/polk.lircd.conf
 
 ### add more keys using option -u --update
@@ -109,7 +108,7 @@ Copied file to /etc/lirc/lircd.conf.d/polk.lircd.conf
 ### list valid key names
 
     irrecord --list-namespace
-    
+
 ## Python Flask web service
 
 ### endpoints
@@ -126,7 +125,7 @@ e.g. use curl or iOS app
 
     http://10.0.0.4:5000/api/v1/tv/volume-decrease/
     http://10.0.0.4:5000/api/v1/tv/volume-increase/
-    
+
 ### start server
 cd to project directory
 
@@ -135,7 +134,7 @@ cd to project directory
 If using conda (e.g. via miniconda), activate environment
 
     source activate beepscore
-    
+
 start flask
 
     python3 service.py
@@ -149,7 +148,7 @@ GET request e.g. from mobile safari
     10.0.0.4:5000/api/v1/tv/ping
 
 pi terminal shows caller's ip address e.g. iphone 10.0.0.3
-    
+
     10.0.0.3 - - [23/Jan/2019 23:39:22] "POST /api/v1/tv/volume-decrease/ HTTP/1.1" 200 -
     10.0.0.3 - - [23/Jan/2019 23:39:26] "POST /api/v1/tv/volume-increase/ HTTP/1.1" 200 -
 
