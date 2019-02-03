@@ -1,14 +1,14 @@
 #!/usr/bin/env/python3
 
-""" A Flask web service to accept television command requests (e.g. volume decrease, volume increase)
+""" A Flask web service to accept remote control command requests (e.g. volume decrease, volume increase)
 and instruct a transmitter (e.g. infrared) to transmit command
 """
 
-# Enum requires Python >= 3.4
-from enum import Enum
-
 from flask import Flask, jsonify, request
-import subprocess
+
+from remote_command import RemoteCommand
+from ir_remote import transmit_command_ir
+
 
 # app is a flask object
 app = Flask(__name__)
@@ -20,43 +20,22 @@ VERSION_KEY = 'version'
 API_NAME = 'tv'
 VERSION = '1.0'
 
-# lirc commands
-IRSEND = 'irsend'
-SEND_ONCE = 'SEND_ONCE'
-
-# use LIRC remote control configuration file /etc/lirc/lircd.conf.d/polk.lirc.conf
-IR_REMOTE = 'polk'
-
-
-class IrCommand(Enum):
-    KEY_MUTE = 'KEY_MUTE'
-    KEY_VOLUMEDOWN = 'KEY_VOLUMEDOWN'
-    KEY_VOLUMEUP = 'KEY_VOLUMEUP'
-    KEY_UP = 'KEY_UP'
-    KEY_DOWN = 'KEY_DOWN'
-
 
 def transmit_command(command):
     """
     instruct infrared transmitter to transmit command
-    :parameter command: an IrCommand with a .value of type String.
+    :parameter command: a RemoteCommand
     :return: data dictionary with status 'success'
     Note success indicates command was sent, not if any television received command
     """
 
+    # mac doesn't have an ir transmitter.
+    # Can run unit tests on macOS by temporarily commenting out call to transmit_command_ir
+    transmit_command_ir(command)
+
     # f string requires Python >= 3.6, so don't use it yet.
     # response = f'transmitted command {command}'
     response = 'transmitted command {}'.format(command.value)
-
-    # Don't allow user to run arbitrary string input, that is a security risk.
-    #
-    # If LIRC irsend isn't installed, throws error:
-    # FileNotFoundError: [Errno 2] No such file or directory: 'irsend': 'irsend'
-    # Can run unit tests on macOS by temporarily disabling subprocess.call(IRSEND...)
-    #
-    # subprocess.run requires Python >= 3.5, so don't use it yet.
-    # subprocess.run([IRSEND, SEND_ONCE, IR_REMOTE, IrCommand.KEY_VOLUMEDOWN.value])
-    subprocess.call([IRSEND, SEND_ONCE, IR_REMOTE, command.value])
 
     data = {API_NAME_KEY: API_NAME,
             VERSION_KEY: VERSION,
@@ -80,34 +59,31 @@ def api_status():
         return jsonify(data)
 
 
-# api use hyphens not underscore to increase searchability
-# https://stackoverflow.com/questions/10302179/hyphen-underscore-or-camelcase-as-word-delimiter-in-uris#18450653
-
 # POST but not GET because GET should not change any state on the server
 
-@app.route("/api/v1/tv/mute/", methods=['POST'])
+@app.route("/api/v1/tv/{}/.format(RemoteCommand.MUTE.value)", methods=['POST'])
 def mute():
-    return transmit_command(IrCommand.KEY_MUTE)
+    return transmit_command(RemoteCommand.MUTE)
 
 
-@app.route("/api/v1/tv/voice-decrease/", methods=['POST'])
+@app.route("/api/v1/tv/{}/.format(RemoteCommand.VOICE_DECREASE.value)", methods=['POST'])
 def voice_decrease():
-    return transmit_command(IrCommand.KEY_DOWN)
+    return transmit_command(RemoteCommand.VOICE_DECREASE)
 
 
-@app.route("/api/v1/tv/voice-increase/", methods=['POST'])
+@app.route("/api/v1/tv/{}/.format(RemoteCommand.VOICE_INCREASE.value)", methods=['POST'])
 def voice_increase():
-    return transmit_command(IrCommand.KEY_UP)
+    return transmit_command(RemoteCommand.VOICE_INCREASE)
 
 
-@app.route("/api/v1/tv/volume-decrease/", methods=['POST'])
+@app.route("/api/v1/tv/{}/.format(RemoteCommand.VOLUME_DECREASE.value)", methods=['POST'])
 def volume_decrease():
-    return transmit_command(IrCommand.KEY_VOLUMEDOWN)
+    return transmit_command(RemoteCommand.VOLUME_DECREASE)
 
 
-@app.route("/api/v1/tv/volume-increase/", methods=['POST'])
+@app.route("/api/v1/tv/{}/.format(RemoteCommand.VOLUME_INCREASE.value)", methods=['POST'])
 def volume_increase():
-    return transmit_command(IrCommand.KEY_VOLUMEUP)
+    return transmit_command(RemoteCommand.VOLUME_INCREASE)
 
 
 if __name__ == '__main__':

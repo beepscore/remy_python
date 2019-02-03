@@ -2,7 +2,8 @@
 
 import unittest
 from flask import Flask
-from service import IrCommand, transmit_command
+from remote_command import RemoteCommand
+from service import transmit_command
 
 
 class TestTvService(unittest.TestCase):
@@ -16,11 +17,11 @@ class TestTvService(unittest.TestCase):
 
         json_expected = {'api_name': 'tv',
                          'version': '1.0',
-                         'response': 'transmitted command KEY_MUTE'}
+                         'response': 'transmitted command mute'}
 
         # call method under test
         # http://flask.pocoo.org/docs/0.12/api/#response-objects
-        response = transmit_command(IrCommand.KEY_MUTE)
+        response = transmit_command(RemoteCommand.MUTE)
 
         self.assertEqual(len(response.headers), 2)
         self.assertEqual(response.status, '200 OK')
@@ -31,11 +32,11 @@ class TestTvService(unittest.TestCase):
 
         json_expected = {'api_name': 'tv',
                          'version': '1.0',
-                         'response': 'transmitted command KEY_VOLUMEDOWN'}
+                         'response': 'transmitted command volume-decrease'}
 
         # call method under test
         # http://flask.pocoo.org/docs/0.12/api/#response-objects
-        response = transmit_command(IrCommand.KEY_VOLUMEDOWN)
+        response = transmit_command(RemoteCommand.VOLUME_DECREASE)
 
         self.assertEqual(len(response.headers), 2)
         self.assertEqual(response.status, '200 OK')
@@ -46,11 +47,11 @@ class TestTvService(unittest.TestCase):
 
         json_expected = {'api_name': 'tv',
                          'version': '1.0',
-                         'response': 'transmitted command KEY_VOLUMEUP'}
+                         'response': 'transmitted command volume-increase'}
 
         # call method under test
         # http://flask.pocoo.org/docs/0.12/api/#response-objects
-        response = transmit_command(IrCommand.KEY_VOLUMEUP)
+        response = transmit_command(RemoteCommand.VOLUME_INCREASE)
 
         self.assertEqual(len(response.headers), 2)
         self.assertEqual(response.status, '200 OK')
