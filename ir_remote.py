@@ -18,6 +18,7 @@ def ir_command(command):
     # values from LIRC remote control configuration file /etc/lirc/lircd.conf.d/polk.lirc.conf
     dict = {
         RemoteCommand.MUTE: 'KEY_MUTE',
+        RemoteCommand.POWER: 'KEY_POWER',
         RemoteCommand.VOICE_DECREASE: 'KEY_DOWN',
         RemoteCommand.VOICE_INCREASE: 'KEY_UP',
         RemoteCommand.VOLUME_DECREASE: 'KEY_VOLUMEDOWN',

@@ -12,6 +12,7 @@ class RemoteCommand(Enum):
     https://stackoverflow.com/questions/10302179/hyphen-underscore-or-camelcase-as-word-delimiter-in-uris#18450653
     """
     MUTE = 'mute'
+    POWER = 'power'
     VOICE_DECREASE = 'voice-decrease'
     VOICE_INCREASE = 'voice-increase'
     VOLUME_DECREASE = 'volume-decrease'

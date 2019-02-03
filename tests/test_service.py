@@ -15,6 +15,7 @@ class TestTvService(unittest.TestCase):
 
     def test_route(self):
         self.assertEqual('/api/v1/tv/mute/', route(RemoteCommand.MUTE))
+        self.assertEqual('/api/v1/tv/power/', route(RemoteCommand.POWER))
         self.assertEqual('/api/v1/tv/voice-decrease/', route(RemoteCommand.VOICE_DECREASE))
         self.assertEqual('/api/v1/tv/voice-increase/', route(RemoteCommand.VOICE_INCREASE))
         self.assertEqual('/api/v1/tv/volume-decrease/', route(RemoteCommand.VOLUME_DECREASE))
@@ -29,6 +30,21 @@ class TestTvService(unittest.TestCase):
         # call method under test
         # http://flask.pocoo.org/docs/0.12/api/#response-objects
         response = transmit_command(RemoteCommand.MUTE)
+
+        self.assertEqual(len(response.headers), 2)
+        self.assertEqual(response.status, '200 OK')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json, json_expected)
+
+    def test_transmit_command_power(self):
+
+        json_expected = {'api_name': 'tv',
+                         'version': '1.0',
+                         'response': 'transmitted command power'}
+
+        # call method under test
+        # http://flask.pocoo.org/docs/0.12/api/#response-objects
+        response = transmit_command(RemoteCommand.POWER)
 
         self.assertEqual(len(response.headers), 2)
         self.assertEqual(response.status, '200 OK')

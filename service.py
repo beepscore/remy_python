@@ -74,6 +74,11 @@ def mute():
     return transmit_command(RemoteCommand.MUTE)
 
 
+@app.route(route(RemoteCommand.POWER), methods=['POST'])
+def power():
+    return transmit_command(RemoteCommand.POWER)
+
+
 @app.route(route(RemoteCommand.VOICE_DECREASE), methods=['POST'])
 def voice_decrease():
     return transmit_command(RemoteCommand.VOICE_DECREASE)
