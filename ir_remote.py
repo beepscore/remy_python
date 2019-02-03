@@ -34,9 +34,7 @@ def ir_command(command):
 def transmit_command_ir(command):
     """
     instruct infrared transmitter to transmit command
-    :parameter command: an IrCommand with a .value of type String.
-    :return: data dictionary with status 'success'
-    Note success indicates command was sent, not if any television received command
+    :parameter command: an IrCommand
     """
 
     ir_command_string = ir_command(command)
