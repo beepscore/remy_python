@@ -16,7 +16,7 @@ IR_REMOTE = 'polk'
 
 def ir_command(command):
     # values from LIRC remote control configuration file /etc/lirc/lircd.conf.d/polk.lirc.conf
-    dict = {
+    command_dict = {
         RemoteCommand.MUTE: 'KEY_MUTE',
         RemoteCommand.POWER: 'KEY_POWER',
         RemoteCommand.VOICE_DECREASE: 'KEY_DOWN',
@@ -24,7 +24,7 @@ def ir_command(command):
         RemoteCommand.VOLUME_DECREASE: 'KEY_VOLUMEDOWN',
         RemoteCommand.VOLUME_INCREASE: 'KEY_VOLUMEUP',
     }
-    return dict.get(command)
+    return command_dict.get(command)
 
 
 def transmit_command_ir(command):
