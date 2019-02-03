@@ -1,7 +1,7 @@
 #!/usr/bin/env/python3
 
 # Enum requires Python >= 3.4
-from enum import Enum, auto
+from enum import Enum
 
 """ Remote control commands. Independent of transmitter type (e.g. infrared, Bluetooth, wifi)
 """
