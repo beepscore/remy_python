@@ -109,9 +109,8 @@ Copied file to /etc/lirc/lircd.conf.d/polk.lircd.conf
 
     irrecord --list-namespace
 
-## Python Flask web service
+## Remote control service
 
-### start server
 cd to project directory
 
     cd ~/beepscore/remy_python
@@ -120,36 +119,38 @@ If using conda (e.g. via miniconda), activate environment
 
     source activate beepscore
 
-start flask
+start Flask web server
 
     python3 service.py
     * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
     * Restarting with stat
 
-now iphone on local network can see pi.
+Now clients on local network can see the remote control service.
 
 ### endpoints
 
+#### GET
+
     http://10.0.0.4:5000/api/v1/tv/ping/
-                        /api/v1/tv/mute/
+    
+#### POST
+Send a remote control command.
+
+    http://10.0.0.4:5000/api/v1/tv/mute/
                         /api/v1/tv/power/
                         /api/v1/tv/voice-decrease/
                         /api/v1/tv/voice-increase/
                         /api/v1/tv/volume-decrease/
                         /api/v1/tv/volume-increase/
 
-#### GET
-Can use a browser such as Firefox or mobile Safari
-
-    http://10.0.0.4:5000/api/v1/tv/ping/
-
-#### POST
-Send a television command
-e.g. use curl or POSTMAN or iOS Remy.app
+### client
+GET requests can be made via a browser such as Firefox or mobile Safari
+POST requests can be made via terminal curl or POSTMAN or iOS Remy.app
 
     curl --request POST http://10.0.0.4:5000/api/v1/tv/volume-decrease/
     
-pi terminal shows caller's ip address e.g. iphone 10.0.0.3
+### server log
+pi terminal shows client's ip address and request info
 
     10.0.0.3 - - [23/Jan/2019 23:39:22] "POST /api/v1/tv/volume-decrease/ HTTP/1.1" 200 -
     10.0.0.3 - - [23/Jan/2019 23:39:26] "POST /api/v1/tv/volume-increase/ HTTP/1.1" 200 -
