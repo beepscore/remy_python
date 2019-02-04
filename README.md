@@ -143,10 +143,14 @@ start flask
 
 now iphone on local network can see pi.
 
-GET request e.g. from mobile safari
+### GET request e.g. from mobile safari
 
     10.0.0.4:5000/api/v1/tv/ping
+    
+### POST request from terminal curl
 
+    curl --request POST http://10.0.0.4:5000/api/v1/tv/volume-decrease/
+    
 pi terminal shows caller's ip address e.g. iphone 10.0.0.3
 
     10.0.0.3 - - [23/Jan/2019 23:39:22] "POST /api/v1/tv/volume-decrease/ HTTP/1.1" 200 -
