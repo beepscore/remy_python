@@ -145,7 +145,7 @@ Send a remote control command.
 
 ### client
 GET requests can be made via a browser such as Firefox or mobile Safari
-POST requests can be made via terminal curl or POSTMAN or iOS Remy.app
+POST requests can be made via clients such as terminal curl or POSTMAN or iOS Remy.app
 
     curl --request POST http://10.0.0.4:5000/api/v1/tv/volume-decrease/
     
