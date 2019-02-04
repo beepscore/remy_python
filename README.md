@@ -111,21 +111,6 @@ Copied file to /etc/lirc/lircd.conf.d/polk.lircd.conf
 
 ## Python Flask web service
 
-### endpoints
-
-#### GET
-e.g. use client browser or curl
-
-    http://10.0.0.4:5000/api/v1/tv/ping/
-    http://10.0.0.4:5000/api/v1/tv/status/
-
-#### POST
-Send a television command
-e.g. use curl or iOS app
-
-    http://10.0.0.4:5000/api/v1/tv/volume-decrease/
-    http://10.0.0.4:5000/api/v1/tv/volume-increase/
-
 ### start server
 cd to project directory
 
@@ -143,11 +128,24 @@ start flask
 
 now iphone on local network can see pi.
 
-### GET request e.g. from mobile safari
+### endpoints
 
-    10.0.0.4:5000/api/v1/tv/ping
-    
-### POST request from terminal curl
+    http://10.0.0.4:5000/api/v1/tv/ping/
+                        /api/v1/tv/mute/
+                        /api/v1/tv/power/
+                        /api/v1/tv/voice-decrease/
+                        /api/v1/tv/voice-increase/
+                        /api/v1/tv/volume-decrease/
+                        /api/v1/tv/volume-increase/
+
+#### GET
+Can use a browser such as Firefox or mobile Safari
+
+    http://10.0.0.4:5000/api/v1/tv/ping/
+
+#### POST
+Send a television command
+e.g. use curl or POSTMAN or iOS Remy.app
 
     curl --request POST http://10.0.0.4:5000/api/v1/tv/volume-decrease/
     
