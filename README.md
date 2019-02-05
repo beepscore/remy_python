@@ -28,7 +28,7 @@ https://www.amazon.com/IR-Remote-Control-Transceiver-Raspberry/dp/B0713SK7RJ/ref
     Suggested packages:
       lirc-compat-remotes lirc-drv-irman lirc-doc lirc-x setserial ir-keytable
 
-### dont install package lirc-compat-remotes
+### don't install package lirc-compat-remotes
 This package is outdated, contains remote definitions which were part of lirc up to 0.9.0.
     
 ### enable lirc-rpi
@@ -41,7 +41,7 @@ In /etc/lirc/lirc_options.conf
 - change driver to default
 - change device to /dev/lirc0
 
-### dont add or edit hardware.conf
+### don't add or edit hardware.conf
 LIRC 0.9.4 does not use hardware.conf
 
 ### Add remote control config files
