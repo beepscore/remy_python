@@ -168,6 +168,9 @@ throws RuntimeError: working outside of request context
 ## Raspberry Pi infrared remote control for a television sound bar
 http://beepscore.com/website/2019/02/03/raspberry-pi-infrared-remote-control-tv.html
 
+## Network enabled Raspberry Pi tv remote control
+http://beepscore.com/website/2019/02/05/network-enabled-raspberry-pi-tv-remote-control.html
+
 ## Remy
 Remote control television by sending commands from iOS device to a server.
 https://github.com/beepscore/Remy
