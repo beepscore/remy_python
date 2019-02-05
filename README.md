@@ -9,9 +9,18 @@ The Python app has two parts:
 - A Flask web service to accept television command requests (e.g. volume decrease, volume increase).
 
 # Results
+Raspberry Pi IR Remote Control https://github.com/mtraver/rpi-ir-remote has helpful up to date suggestions for configuring current versions of LIRC (0.9.4) and Raspbian (Stretch) and warnings about outdated online info.
 
-## LIRC
-Raspberry Pi IR Remote Control https://github.com/mtraver/rpi-ir-remote has helpful up to date suggestions for configuring current versions of LIRC (0.94) and Raspbian (Stretch) and warnings about outdated online info.
+## Infrared remote
+
+### Install hardware
+Raspberry Pi IR Control Expansion Board. This uses gpio pins 17 out (IR LED), pin 18 in (IR receiver).
+http://www.raspberrypiwiki.com/index.php/Raspberry_Pi_IR_Control_Expansion_Board
+
+I purchased Icstation 38KHz IR Infrared Remote Control Transceiver Shield for Raspberry Pi 2 3 Module B B+
+https://www.amazon.com/IR-Remote-Control-Transceiver-Raspberry/dp/B0713SK7RJ/ref=pd_cp_147_1?pd_rd_w=nydwe&pf_rd_p=ef4dc990-a9ca-4945-ae0b-f8d549198ed6&pf_rd_r=NPTQR2NR66SZXGEC1CFF&pd_rd_r=dc222ec9-1d1f-11e9-82b3-7117715d74e2&pd_rd_wg=OnVSD&pd_rd_i=B0713SK7RJ&psc=1&refRID=NPTQR2NR66SZXGEC1CFF
+
+### install LIRC
 
     sudo apt-get install lirc
     The following additional packages will be installed:
@@ -19,21 +28,32 @@ Raspberry Pi IR Remote Control https://github.com/mtraver/rpi-ir-remote has help
     Suggested packages:
       lirc-compat-remotes lirc-drv-irman lirc-doc lirc-x setserial ir-keytable
 
+### dont install package lirc-compat-remotes
+This package is outdated, contains remote definitions which were part of lirc up to 0.9.0.
+    
+### enable lirc-rpi
 Add the following content to /boot/config.txt
 
     dtoverlay=lirc-rpi,gpio_in_pin=18,gpio_out_pin=17
-    
-### lirc-compat-remotes (outdated)
-This package contains the remote definitions which were part of lirc up to 0.9.0.
-    
-### lirc-remotes
-https://sourceforge.net/projects/lirc-remotes/
 
+### enable transmitting 
+In /etc/lirc/lirc_options.conf
+- change driver to default
+- change device to /dev/lirc0
+
+### dont add or edit hardware.conf
 LIRC 0.9.4 does not use hardware.conf
 
-https://sourceforge.net/p/lirc/wiki/Drivers/
+### Add remote control config files
+lirc looks in a configuration directory for files ending in .conf
 
-I copied a lirc configuration file
+    /etc/lirc/lircd.conf.d
+
+https://sourceforge.net/projects/lirc-remotes/ has config files for many remotes.
+You can try any of these to see if they work with your device.
+
+I added cxa_cxc_cxn.lircd.conf
+
     pi@raspberrypi:/etc/lirc/lircd.conf.d $ sudo cp ~/beepscore/rpi-ir-remote/config/lirc/cxa_cxc_cxn.lircd.conf .
 
 Ran lirc command irsend
@@ -59,20 +79,18 @@ However the remote configuration cambridge_cxa doesn't work with my Polk receive
     
 #### Disable incorrect remote configuration files
 https://learn.adafruit.com/using-an-ir-remote-with-a-raspberry-pi-media-center/using-other-remotes
-lirc looks in .conf.d directory for files ending in .conf
-To disable a file change extension from .conf to e.g. .dist
+To disable a configuration file change extension from .conf to e.g. .dist
 
     cd /etc/lirc/lircd.conf.d
     sudo mv devinput.lircd.conf devinput.lircd.dist
     
-### irrecord
-http://www.lirc.org/html/irrecord.html
+### Generate a new configuration file.
+lirc-remotes has lots of files, but none named polk. Could try existing ones but this could be time consuming.
+Instead use an existing handheld remote to "teach" the Raspberry Pi how to act like that remote.
+The Raspberry Pi IR Control Expansion Board has an infrared receiver.
+LIRC command irrecord records button press infrared signals. http://www.lirc.org/html/irrecord.html
 
-lirc-remotes has lots of files, but none named polk.
-Could try existing ones but this could be time consuming.
-Instead record existing physical remote.
-
-#### error need to stop lirc daemon
+#### irrecord error need to stop lirc daemon
 
     irrecord -d /dev/lirc0 ~/lircd.conf
 
