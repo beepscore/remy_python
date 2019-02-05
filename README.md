@@ -107,8 +107,10 @@ LIRC command irrecord records button press infrared signals. http://www.lirc.org
     sudo killall -9 lircd
 
 ##### irrecord -d didn't work with polk remote, it never got enough info to make a .conf file.
+In repo remy_python I added directory config to keep polk.lircd.conf in version control.
 
-    irrecord -d /dev/lirc0 ~/lircd.conf
+    cd remy_python/config
+    irrecord -d /dev/lirc0 ./polk.lircd.conf
 
 ##### fix recording failing using option -f --force raw mode
 
@@ -116,12 +118,18 @@ LIRC command irrecord records button press infrared signals. http://www.lirc.org
 
 Enter valid key names e.g. KEY_VOLUMEDOWN
 
-Copied file to /etc/lirc/lircd.conf.d/polk.lircd.conf
+For LIRC to use configuration file, copied it to
+
+    /etc/lirc/lircd.conf.d/polk.lircd.conf
 
 ### add more keys using option -u --update
 
-    cd /etc/lirc/lircd.conf.d
+    cd remy_python/config
     irrecord -f -u ./polk.lircd.conf
+
+Then copy updated file to 
+
+    /etc/lirc/lircd.conf.d/polk.lircd.conf
 
 ### list valid key names
 
