@@ -9,7 +9,7 @@ The Python app has two parts:
 - A Flask web service to accept television command requests (e.g. volume decrease, volume increase).
 
 # Results
-Raspberry Pi IR Remote Control https://github.com/mtraver/rpi-ir-remote has helpful up to date suggestions for configuring current versions of LIRC (0.9.4) and Raspbian (Stretch) and warnings about outdated online info.
+Michael Traver's excellent "Raspberry Pi IR Remote Control" https://github.com/mtraver/rpi-ir-remote has helpful up to date suggestions for configuring current versions of LIRC (0.9.4) and Raspbian (Stretch) and warnings about outdated online info.
 
 ## Infrared remote
 
@@ -17,7 +17,7 @@ Raspberry Pi IR Remote Control https://github.com/mtraver/rpi-ir-remote has help
 Raspberry Pi IR Control Expansion Board. This uses gpio pins 17 out (IR LED), pin 18 in (IR receiver).
 http://www.raspberrypiwiki.com/index.php/Raspberry_Pi_IR_Control_Expansion_Board
 
-I purchased Icstation 38KHz IR Infrared Remote Control Transceiver Shield for Raspberry Pi 2 3 Module B B+
+I bought Icstation 38KHz IR Infrared Remote Control Transceiver Shield for Raspberry Pi 2 3 Module B B+
 https://www.amazon.com/IR-Remote-Control-Transceiver-Raspberry/dp/B0713SK7RJ/ref=pd_cp_147_1?pd_rd_w=nydwe&pf_rd_p=ef4dc990-a9ca-4945-ae0b-f8d549198ed6&pf_rd_r=NPTQR2NR66SZXGEC1CFF&pd_rd_r=dc222ec9-1d1f-11e9-82b3-7117715d74e2&pd_rd_wg=OnVSD&pd_rd_i=B0713SK7RJ&psc=1&refRID=NPTQR2NR66SZXGEC1CFF
 
 ### install LIRC
@@ -204,6 +204,7 @@ https://github.com/beepscore/Remy
 ## Similar remote control projects
 
 ### Raspberry Pi IR Remote Control 2018, uses Go
+by Michael Traver
 https://github.com/mtraver/rpi-ir-remote
 
 ### LIRC Debian Stretch Raspberry Pi 2018
