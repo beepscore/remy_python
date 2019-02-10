@@ -1,19 +1,11 @@
 #!/usr/bin/env/python3
 
-# schedule appears less widely supported than apscheduler e.g. via conda
-
-# https://schedule.readthedocs.io/en/stable/
-# https://github.com/dbader/schedule
 # Potential alternatives:
 # Use cron, available on Raspberry Pi Raspbian Linux don't need to worry about Windows
-# Use more complicated apscheduler or luigi, available via conda
+# flask-apscheduler adds support for flask context but I think that's not needed here
 # https://github.com/agronholm/apscheduler/blob/master/docs/userguide.rst
-# https://github.com/spotify/luigi
 
-# Currently schedule isn't installed in my environment and this won't run.
-# import schedule
-#
-# import time
+# from apscheduler.scheduler import Scheduler
 # from collections import namedtuple
 # from remote_command import RemoteCommand
 # from ir_remote import transmit_command_ir
