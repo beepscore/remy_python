@@ -37,9 +37,13 @@ def add_ir_jobs(scheduler):
 
     # datetime.time: An idealized time, independent of any particular day
     # TODO: consider implement weekdays e.g. via datetime.datetime
+    # TODO: consider read quiet_times from a json file
     quiet_times = [
-        QuietTime(datetime.time(hour=11, minute=1, second=0), datetime.time(hour=11, minute=2, second=0)),
-        QuietTime(datetime.time(hour=18, minute=1, second=0), datetime.time(hour=18, minute=2, second=0)),
+        QuietTime(datetime.time(hour=12, minute=1, second=0), datetime.time(hour=12, minute=2, second=0)),
+        QuietTime(datetime.time(hour=12, minute=3, second=0), datetime.time(hour=12, minute=4, second=0)),
+        QuietTime(datetime.time(hour=12, minute=5, second=0), datetime.time(hour=12, minute=6, second=0)),
+        QuietTime(datetime.time(hour=12, minute=7, second=0), datetime.time(hour=12, minute=8, second=0)),
+        QuietTime(datetime.time(hour=12, minute=9, second=0), datetime.time(hour=12, minute=10, second=0)),
     ]
 
     for quiet_time in quiet_times:
