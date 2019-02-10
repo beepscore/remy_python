@@ -6,6 +6,7 @@ from remote_command import RemoteCommand
 
 import subprocess
 
+# use constants and unit tests to help guard against misspelling
 # lirc commands
 IRSEND = 'irsend'
 SEND_ONCE = 'SEND_ONCE'
