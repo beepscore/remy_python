@@ -9,6 +9,8 @@ from flask import Flask, jsonify, request
 from remote_command import RemoteCommand
 from ir_remote import transmit_command_ir
 
+import scheduler
+
 
 # app is a flask object
 app = Flask(__name__)
@@ -100,6 +102,9 @@ def volume_increase():
 
 
 if __name__ == '__main__':
+
+    scheduler.schedule_jobs()
+
     try:
         # '0.0.0.0' accessible to any device on the network
         app.run(host='0.0.0.0', debug=True)
