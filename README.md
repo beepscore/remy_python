@@ -143,7 +143,7 @@ cd to project directory
 
 If using conda (e.g. via miniconda), activate environment
 
-    source activate beepscore
+    source activate remy_python
 
 start Flask web server
 
