@@ -68,4 +68,5 @@ def add_ir_jobs(scheduler):
 
 if __name__ == '__main__':
 
+    # from command line, python scheduler.py will run schedule, won't run Flask service
     schedule_jobs()
