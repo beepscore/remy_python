@@ -11,8 +11,9 @@ import subprocess
 IRSEND = 'irsend'
 SEND_ONCE = 'SEND_ONCE'
 
-# use LIRC remote control configuration file /etc/lirc/lircd.conf.d/polk.lirc.conf
-IR_REMOTE = 'polk'
+# directory /etc/lirc/lircd.conf.d may contain multiple remote control configuration files e.g.
+# /polk.lirc.conf
+POLK_IR_REMOTE = 'polk'
 
 
 def ir_command(command):
@@ -46,5 +47,5 @@ def transmit_command_ir(command):
     # FileNotFoundError: [Errno 2] No such file or directory: 'irsend': 'irsend'
     #
     # subprocess.run requires Python >= 3.5, so don't use it yet.
-    subprocess.call([IRSEND, SEND_ONCE, IR_REMOTE, ir_command_string])
+    subprocess.call([IRSEND, SEND_ONCE, POLK_IR_REMOTE, ir_command_string])
 
