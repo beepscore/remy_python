@@ -95,14 +95,18 @@ def add_jobs_volume(quiet_times, scheduler):
 
 
 def add_jobs_mute(quiet_times, scheduler):
+    """ mute sound during each quiet time
+    """
 
     for quiet_time in quiet_times:
         # add_job, implicitly create the trigger
         # args is for function transmit_command_ir
+        # first call to mute toggles sound off
         scheduler.add_job(transmit_command_ir, cron,
                           day_of_week=day_of_week,
                           hour=quiet_time.start.hour, minute=quiet_time.start.minute, second=quiet_time.start.second,
                           args=[RemoteCommand.MUTE])
+        # next call to mute toggles sound on
         scheduler.add_job(transmit_command_ir, cron,
                           day_of_week=day_of_week,
                           hour=quiet_time.end.hour, minute=quiet_time.end.minute, second=quiet_time.end.second,

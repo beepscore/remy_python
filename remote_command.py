@@ -10,6 +10,8 @@ from enum import Enum
 class RemoteCommand(Enum):
     """ api use hyphens not underscore to increase searchability
     https://stackoverflow.com/questions/10302179/hyphen-underscore-or-camelcase-as-word-delimiter-in-uris#18450653
+    mute alternate calls toggle sound off and on
+    power alternate calls toggle power off and on
     """
     MUTE = 'mute'
     POWER = 'power'
