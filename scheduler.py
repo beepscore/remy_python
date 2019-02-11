@@ -19,34 +19,22 @@ QuietTime = namedtuple('QuietTime', 'start end')
 
 # datetime.time: An idealized time, independent of any particular day
 # TODO: consider read quiet_times from a json file
-quiet_times_debug = [
-    QuietTime(datetime.time(hour=17, minute=1, second=0), datetime.time(hour=17, minute=2, second=0)),
-    QuietTime(datetime.time(hour=17, minute=3, second=0), datetime.time(hour=17, minute=4, second=0)),
-    QuietTime(datetime.time(hour=17, minute=5, second=0), datetime.time(hour=17, minute=6, second=0)),
-    QuietTime(datetime.time(hour=17, minute=7, second=0), datetime.time(hour=17, minute=8, second=0)),
-    QuietTime(datetime.time(hour=17, minute=9, second=0), datetime.time(hour=17, minute=10, second=0)),
-    QuietTime(datetime.time(hour=17, minute=11, second=0), datetime.time(hour=17, minute=12, second=0)),
-    QuietTime(datetime.time(hour=17, minute=13, second=0), datetime.time(hour=17, minute=14, second=0)),
-    QuietTime(datetime.time(hour=17, minute=15, second=0), datetime.time(hour=17, minute=16, second=0)),
-    QuietTime(datetime.time(hour=17, minute=17, second=0), datetime.time(hour=17, minute=18, second=0)),
-    QuietTime(datetime.time(hour=17, minute=19, second=0), datetime.time(hour=17, minute=20, second=0)),
-    QuietTime(datetime.time(hour=17, minute=21, second=0), datetime.time(hour=17, minute=22, second=0)),
-    QuietTime(datetime.time(hour=17, minute=23, second=0), datetime.time(hour=17, minute=24, second=0)),
-    QuietTime(datetime.time(hour=17, minute=25, second=0), datetime.time(hour=17, minute=26, second=0)),
-    QuietTime(datetime.time(hour=17, minute=27, second=0), datetime.time(hour=17, minute=28, second=0)),
-    QuietTime(datetime.time(hour=17, minute=29, second=0), datetime.time(hour=17, minute=30, second=0)),
-    QuietTime(datetime.time(hour=17, minute=31, second=0), datetime.time(hour=17, minute=32, second=0)),
-    QuietTime(datetime.time(hour=17, minute=33, second=0), datetime.time(hour=17, minute=34, second=0)),
-    QuietTime(datetime.time(hour=17, minute=35, second=0), datetime.time(hour=17, minute=36, second=0)),
-    QuietTime(datetime.time(hour=17, minute=37, second=0), datetime.time(hour=17, minute=38, second=0))
+quiet_times17 = [
+    # observed sunday
+    QuietTime(datetime.time(hour=17, minute=17, second=0), datetime.time(hour=17, minute=20, second=0)),
+    QuietTime(datetime.time(hour=17, minute=27, second=0), datetime.time(hour=17, minute=31, second=20)),
+    QuietTime(datetime.time(hour=17, minute=38, second=15), datetime.time(hour=17, minute=41, second=45)),
+    QuietTime(datetime.time(hour=17, minute=48, second=0), datetime.time(hour=17, minute=51, second=50)),
+    QuietTime(datetime.time(hour=17, minute=54, second=20), datetime.time(hour=17, minute=57, second=50))
 ]
 
 quiet_times18 = [
-    QuietTime(datetime.time(hour=18, minute=1, second=0), datetime.time(hour=18, minute=2, second=0)),
-    QuietTime(datetime.time(hour=18, minute=3, second=0), datetime.time(hour=18, minute=4, second=0)),
-    QuietTime(datetime.time(hour=18, minute=5, second=0), datetime.time(hour=18, minute=6, second=0)),
-    QuietTime(datetime.time(hour=18, minute=7, second=0), datetime.time(hour=18, minute=8, second=0)),
-    QuietTime(datetime.time(hour=18, minute=9, second=0), datetime.time(hour=18, minute=10, second=0))
+    QuietTime(datetime.time(hour=18, minute=7, second=0), datetime.time(hour=18, minute=10, second=0)),
+    QuietTime(datetime.time(hour=18, minute=17, second=0), datetime.time(hour=18, minute=20, second=0)),
+    QuietTime(datetime.time(hour=18, minute=27, second=0), datetime.time(hour=18, minute=31, second=20)),
+    QuietTime(datetime.time(hour=18, minute=38, second=15), datetime.time(hour=18, minute=41, second=45)),
+    QuietTime(datetime.time(hour=18, minute=48, second=0), datetime.time(hour=18, minute=51, second=50)),
+    QuietTime(datetime.time(hour=18, minute=54, second=20), datetime.time(hour=18, minute=57, second=50))
 ]
 
 
@@ -57,8 +45,9 @@ def schedule_jobs():
     # apscheduler job store- use default MemoryJobStore, in memory, not persisted
     # apscheduler executor- use default
 
-    scheduler.start()
+    # can add jobs before or after starting scheduler
     add_ir_jobs(scheduler)
+    scheduler.start()
 
 
 def add_ir_jobs(scheduler):
@@ -67,7 +56,7 @@ def add_ir_jobs(scheduler):
     :param scheduler: an APScheduler
     """
     # add_jobs_volume(quiet_times18, scheduler)
-    add_jobs_mute(quiet_times_debug, scheduler)
+    add_jobs_mute(quiet_times17, scheduler)
 
 
 def add_jobs_volume(quiet_times, scheduler):
