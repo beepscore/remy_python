@@ -3,10 +3,11 @@ Make a Raspberry Pi infrared remote control.
 The device can programmatically control television sound bar audio volume.
 The Raspberry Pi uses LIRC (Linux Infrared Remote Control) to send commands to an attached infrared transmitter.
 
-The Python app has two parts:
+The Python app has three parts:
 
 - Functions to send commands to the infrared transmitter, which then transmits the commands to the television sound bar
-- A Flask web service to accept television command requests (e.g. volume decrease, volume increase).
+- A Flask web service to accept television command requests (e.g. volume decrease, volume increase)
+- A scheduler that automatically sends remote control commands at programmed times (e.g. mute during TV commercials)
 
 # Results
 Michael Traver's excellent "Raspberry Pi IR Remote Control" https://github.com/mtraver/rpi-ir-remote has helpful up to date suggestions for configuring current versions of LIRC (0.9.4) and Raspbian (Stretch) and warnings about outdated online info.
@@ -181,18 +182,28 @@ pi terminal shows client's ip address and request info
     10.0.0.3 - - [23/Jan/2019 23:39:22] "POST /api/v1/tv/volume-decrease/ HTTP/1.1" 200 -
     10.0.0.3 - - [23/Jan/2019 23:39:26] "POST /api/v1/tv/volume-increase/ HTTP/1.1" 200 -
 
-## scheduler
+## Scheduler
 
 ### install apscheduler
-On macOS, I used conda navigator.
-
-On raspberry pi, I couldn't find conda apscheduler. Install via pip.
+On macOS, can install via conda navigator.
+However I couldn't find conda apscheduler for raspberry pi. So install via pip.
 
     source activate remy_python
     pip install apscheduler
     
+### run
+To run server and scheduler
+
+    source activate remy_python
+    python service.py
+     
+To run scheduler but not server
+
+    source activate remy_python
+    python scheduler.py
+
 ## unit tests
-Can run tests on macOS by temporarily disabling service.py subprocess.call(irsend)
+Can run tests on macOS by temporarily commenting out service.py subprocess.call(irsend)
 Not sure how to run tests on pi yet.
 
     python -m unittest discover
