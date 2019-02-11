@@ -28,7 +28,7 @@ quiet_times_debug = [
     QuietTime(datetime.time(hour=17, minute=13, second=0), datetime.time(hour=17, minute=14, second=0)),
     QuietTime(datetime.time(hour=17, minute=15, second=0), datetime.time(hour=17, minute=16, second=0)),
     QuietTime(datetime.time(hour=17, minute=17, second=0), datetime.time(hour=17, minute=18, second=0)),
-    QuietTime(datetime.time(hour=17, minute=19, second=0), datetime.time(hour=17, minute=20, second=0))
+    QuietTime(datetime.time(hour=17, minute=19, second=0), datetime.time(hour=17, minute=20, second=0)),
     QuietTime(datetime.time(hour=17, minute=21, second=0), datetime.time(hour=17, minute=22, second=0)),
     QuietTime(datetime.time(hour=17, minute=23, second=0), datetime.time(hour=17, minute=24, second=0)),
     QuietTime(datetime.time(hour=17, minute=25, second=0), datetime.time(hour=17, minute=26, second=0)),
