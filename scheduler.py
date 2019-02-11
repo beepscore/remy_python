@@ -37,11 +37,15 @@ def add_ir_jobs(scheduler):
     # datetime.time: An idealized time, independent of any particular day
     # TODO: consider read quiet_times from a json file
     quiet_times_debug = [
-        QuietTime(datetime.time(hour=14, minute=1, second=0), datetime.time(hour=14, minute=2, second=0)),
-        QuietTime(datetime.time(hour=14, minute=3, second=0), datetime.time(hour=14, minute=4, second=0)),
-        QuietTime(datetime.time(hour=14, minute=5, second=0), datetime.time(hour=14, minute=6, second=0)),
-        QuietTime(datetime.time(hour=14, minute=7, second=0), datetime.time(hour=14, minute=8, second=0)),
-        QuietTime(datetime.time(hour=14, minute=9, second=0), datetime.time(hour=14, minute=10, second=0))
+        QuietTime(datetime.time(hour=16, minute=21, second=0), datetime.time(hour=16, minute=22, second=0)),
+        QuietTime(datetime.time(hour=16, minute=23, second=0), datetime.time(hour=16, minute=24, second=0)),
+        QuietTime(datetime.time(hour=16, minute=25, second=0), datetime.time(hour=16, minute=26, second=0)),
+        QuietTime(datetime.time(hour=16, minute=27, second=0), datetime.time(hour=16, minute=28, second=0)),
+        QuietTime(datetime.time(hour=16, minute=29, second=0), datetime.time(hour=16, minute=30, second=0)),
+        QuietTime(datetime.time(hour=16, minute=31, second=0), datetime.time(hour=16, minute=32, second=0)),
+        QuietTime(datetime.time(hour=16, minute=33, second=0), datetime.time(hour=16, minute=34, second=0)),
+        QuietTime(datetime.time(hour=16, minute=35, second=0), datetime.time(hour=16, minute=36, second=0)),
+        QuietTime(datetime.time(hour=16, minute=37, second=0), datetime.time(hour=16, minute=38, second=0))
     ]
 
     quiet_times18 = [
