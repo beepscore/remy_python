@@ -37,6 +37,15 @@ quiet_times18 = [
     QuietTime(datetime.time(hour=18, minute=54, second=20), datetime.time(hour=18, minute=57, second=50))
 ]
 
+quiet_times19 = [
+    QuietTime(datetime.time(hour=19, minute=7, second=0), datetime.time(hour=19, minute=10, second=0)),
+    QuietTime(datetime.time(hour=19, minute=17, second=0), datetime.time(hour=19, minute=20, second=0)),
+    QuietTime(datetime.time(hour=19, minute=27, second=0), datetime.time(hour=19, minute=31, second=20)),
+    QuietTime(datetime.time(hour=19, minute=38, second=15), datetime.time(hour=19, minute=41, second=45)),
+    QuietTime(datetime.time(hour=19, minute=48, second=0), datetime.time(hour=19, minute=51, second=50)),
+    QuietTime(datetime.time(hour=19, minute=54, second=20), datetime.time(hour=19, minute=57, second=50))
+]
+
 
 def schedule_jobs():
     """ Calls remote control functions based on time of day
@@ -46,17 +55,19 @@ def schedule_jobs():
     # apscheduler executor- use default
 
     # can add jobs before or after starting scheduler
-    add_ir_jobs(scheduler)
+    add_jobs_ir_remote(scheduler)
     scheduler.start()
 
 
-def add_ir_jobs(scheduler):
+def add_jobs_ir_remote(scheduler):
     """
     https://apscheduler.readthedocs.io/en/latest/modules/triggers/cron.html#module-apscheduler.triggers.cron
     :param scheduler: an APScheduler
     """
     # add_jobs_volume(quiet_times18, scheduler)
-    add_jobs_mute(quiet_times17, scheduler)
+
+    quiet_times = quiet_times17 + quiet_times18 + quiet_times19
+    add_jobs_mute(quiet_times, scheduler)
 
 
 def add_jobs_volume(quiet_times, scheduler):
