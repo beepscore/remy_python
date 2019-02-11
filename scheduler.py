@@ -13,6 +13,7 @@ from remote_command import RemoteCommand
 from ir_remote import transmit_command_ir
 
 cron = 'cron'
+day_of_week = 'mon-sun'
 
 QuietTime = namedtuple('QuietTime', 'start end')
 
@@ -47,6 +48,7 @@ quiet_times18 = [
     QuietTime(datetime.time(hour=18, minute=7, second=0), datetime.time(hour=18, minute=8, second=0)),
     QuietTime(datetime.time(hour=18, minute=9, second=0), datetime.time(hour=18, minute=10, second=0))
 ]
+
 
 def schedule_jobs():
     """ Calls remote control functions based on time of day
@@ -83,11 +85,11 @@ def add_jobs_volume(quiet_times, scheduler):
         # add_job, implicitly create the trigger
         # args is for function transmit_command_ir
         scheduler.add_job(transmit_command_ir, cron,
-                          day_of_week='mon-sat',
+                          day_of_week=day_of_week,
                           hour=quiet_time.start.hour, minute=quiet_time.start.minute, second=quiet_time.start.second,
                           args=[RemoteCommand.VOLUME_DECREASE])
         scheduler.add_job(transmit_command_ir, cron,
-                          day_of_week='mon-sat',
+                          day_of_week=day_of_week,
                           hour=quiet_time.end.hour, minute=quiet_time.end.minute, second=quiet_time.end.second,
                           args=[RemoteCommand.VOLUME_INCREASE])
 
@@ -98,11 +100,11 @@ def add_jobs_mute(quiet_times, scheduler):
         # add_job, implicitly create the trigger
         # args is for function transmit_command_ir
         scheduler.add_job(transmit_command_ir, cron,
-                          day_of_week='mon-sat',
+                          day_of_week=day_of_week,
                           hour=quiet_time.start.hour, minute=quiet_time.start.minute, second=quiet_time.start.second,
                           args=[RemoteCommand.MUTE])
         scheduler.add_job(transmit_command_ir, cron,
-                          day_of_week='mon-sat',
+                          day_of_week=day_of_week,
                           hour=quiet_time.end.hour, minute=quiet_time.end.minute, second=quiet_time.end.second,
                           args=[RemoteCommand.MUTE])
 
