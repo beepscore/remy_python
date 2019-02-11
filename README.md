@@ -181,6 +181,16 @@ pi terminal shows client's ip address and request info
     10.0.0.3 - - [23/Jan/2019 23:39:22] "POST /api/v1/tv/volume-decrease/ HTTP/1.1" 200 -
     10.0.0.3 - - [23/Jan/2019 23:39:26] "POST /api/v1/tv/volume-increase/ HTTP/1.1" 200 -
 
+## scheduler
+
+### install apscheduler
+On macOS, I used conda navigator.
+
+On raspberry pi, I couldn't find conda apscheduler. Install via pip.
+
+    source activate remy_python
+    pip install apscheduler
+    
 ## unit tests
 Can run tests on macOS by temporarily disabling service.py subprocess.call(irsend)
 Not sure how to run tests on pi yet.
