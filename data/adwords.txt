@@ -4,6 +4,7 @@ audi
 bank of america
 bmw
 botox
+bounty
 budweiser
 celebrex
 chantix
@@ -17,12 +18,15 @@ crestor
 eliquis
 entyvio
 farxiga
+flonase
 ford
 geico
 harvoni
+home advisor
 honda
 humira
 immodium
+infiniti
 jaguar
 kia
 land rover
@@ -31,6 +35,7 @@ lincoln navigator
 mazda
 mcdonalds
 mercedes
+nexium
 nissan
 otezla
 pacific life
@@ -39,6 +44,7 @@ pom
 progressive
 smart news
 subaru
+t d ameritrade
 toyota
 viagra
 volkswagen
@@ -46,3 +52,4 @@ volvo
 wells fargo
 xarelto
 xylanta
+zenni dot com
