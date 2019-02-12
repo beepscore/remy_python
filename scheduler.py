@@ -55,6 +55,11 @@ quiet_times20 = [
     QuietTime(datetime.time(hour=20, minute=54, second=10), datetime.time(hour=20, minute=57, second=50))
 ]
 
+quiet_times21 = [
+    # observed Monday
+    QuietTime(datetime.time(hour=21, minute=25, second=45), datetime.time(hour=21, minute=29, second=40))
+]
+
 
 def schedule_jobs():
     """ Calls remote control functions based on time of day
@@ -75,7 +80,7 @@ def add_jobs_ir_remote(scheduler):
     """
     # add_jobs_volume(quiet_times18, scheduler)
 
-    quiet_times = quiet_times17 + quiet_times18 + quiet_times19 + quiet_times20
+    quiet_times = quiet_times17 + quiet_times18 + quiet_times19 + quiet_times20 + quiet_times21
     add_jobs_mute(quiet_times, scheduler)
 
 
