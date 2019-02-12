@@ -124,7 +124,6 @@ venv/*
 # data/*
 
 # text files
-*.txt
 !requirements.txt
 
 # csv files
