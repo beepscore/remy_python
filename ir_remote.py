@@ -5,6 +5,11 @@
 from remote_command import RemoteCommand
 
 import subprocess
+import logging_util
+
+# instantiate at module level, not class level
+# https://stackoverflow.com/questions/22807972/python-best-practice-in-terms-of-logging
+logger = logging_util.get_logger(__name__)
 
 # use constants and unit tests to help guard against misspelling
 # lirc commands
@@ -44,6 +49,10 @@ def transmit_command_ir(command):
 
     # translate and "sanitize" command
     ir_command_string = ir_command(command)
+
+    logger.debug('command: {}\n'.format(command))
+    # e.g.
+    # 2019-02-16 13:36:02 DEBUG    transmit_command_ir line:58 command: RemoteCommand.MUTE
 
     if ir_command_string is None:
         # command unrecognized
