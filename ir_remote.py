@@ -18,7 +18,8 @@ POLK_IR_REMOTE = 'polk'
 
 def ir_command(command):
     """
-    :parameter command: a RemoteCommand
+    Translates and "sanitizes" command
+    :parameter command: typically a RemoteCommand. Caller could supply arbitrary string or other object.
     :return: valid command string for infrared remote, else None
     values from LIRC remote control configuration file /etc/lirc/lircd.conf.d/polk.lircd.conf
     """
@@ -37,11 +38,11 @@ def transmit_command_ir(command):
     """
     Instructs infrared transmitter to transmit command
     Uses python subprocess to call LIRC irsend.
-    Doesn't allow user to run arbitrary input, that is a security risk.
-    :parameter command: typically an IrCommand. Caller could supply arbitrary string or other object.
+    Doesn't allow user to run arbitrary input, that would be a security risk.
+    :parameter command: typically a RemoteCommand. Caller could supply arbitrary string or other object.
     """
 
-    # ir_command(command) translates and "sanitizes" command
+    # translate and "sanitize" command
     ir_command_string = ir_command(command)
 
     if ir_command_string is None:
