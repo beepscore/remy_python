@@ -208,6 +208,10 @@ To run scheduler but not server
     source activate remy_python
     python scheduler.py
 
+## adwords.txt
+Currently unused. Could be used together with closed caption text or speech recognition to detect commercials.
+Some commercials don't say product/service/company name until late in the commercial.
+
 ## unit tests
 Can run tests on macOS by temporarily commenting out service.py subprocess.call(irsend)
 Not sure how to run tests on pi yet.
