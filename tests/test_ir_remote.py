@@ -17,6 +17,8 @@ class MyTestCase(unittest.TestCase):
     def test_ir_command(self):
         self.assertEqual('KEY_MUTE',
                          ir_remote.ir_command(RemoteCommand.MUTE))
+        self.assertEqual('KEY_POWER',
+                         ir_remote.ir_command(RemoteCommand.POWER))
         self.assertEqual('KEY_DOWN',
                          ir_remote.ir_command(RemoteCommand.VOICE_DECREASE))
         self.assertEqual('KEY_UP',
