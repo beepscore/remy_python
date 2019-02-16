@@ -36,9 +36,9 @@ def ir_command(command):
 def transmit_command_ir(command):
     """
     Instructs infrared transmitter to transmit command
-    Calls LIRC irsend via subprocess.
-    Doesn't allow user to run arbitrary string input, that is a security risk.
-    :parameter command: typically an IrCommand. User could supply arbitrary string
+    Uses python subprocess to call LIRC irsend.
+    Doesn't allow user to run arbitrary input, that is a security risk.
+    :parameter command: typically an IrCommand. Caller could supply arbitrary string or other object.
     """
 
     # ir_command(command) translates and "sanitizes" command
