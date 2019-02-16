@@ -28,7 +28,7 @@ def ir_command(command):
         RemoteCommand.VOICE_DECREASE: 'KEY_DOWN',
         RemoteCommand.VOICE_INCREASE: 'KEY_UP',
         RemoteCommand.VOLUME_DECREASE: 'KEY_VOLUMEDOWN',
-        RemoteCommand.VOLUME_INCREASE: 'KEY_VOLUMEUP',
+        RemoteCommand.VOLUME_INCREASE: 'KEY_VOLUMEUP'
     }
     return command_dict.get(command)
 
