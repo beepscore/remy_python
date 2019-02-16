@@ -15,7 +15,12 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual('polk', ir_remote.POLK_IR_REMOTE)
 
     def test_ir_command(self):
-        self.assertEqual('KEY_MUTE', ir_remote.ir_command(RemoteCommand.MUTE))
+        self.assertEqual('KEY_MUTE',
+                         ir_remote.ir_command(RemoteCommand.MUTE))
+        self.assertEqual('KEY_DOWN',
+                         ir_remote.ir_command(RemoteCommand.VOICE_DECREASE))
+        self.assertEqual('KEY_UP',
+                         ir_remote.ir_command(RemoteCommand.VOICE_INCREASE))
         self.assertEqual('KEY_VOLUMEDOWN',
                          ir_remote.ir_command(RemoteCommand.VOLUME_DECREASE))
         self.assertEqual('KEY_VOLUMEUP',
