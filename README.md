@@ -63,7 +63,8 @@ I added cxa_cxc_cxn.lircd.conf
 
     pi@raspberrypi:/etc/lirc/lircd.conf.d $ sudo cp ~/beepscore/rpi-ir-remote/config/lirc/cxa_cxc_cxn.lircd.conf .
 
-Ran lirc command irsend
+### list cambridge_cxa configuration defined keys
+Use lirc command irsend
 
     irsend list cambridge_cxa ""
 
@@ -76,13 +77,13 @@ Ran lirc command irsend
     0000000000001410 KEY_VOLUMEUP
     0000000000001411 KEY_VOLUMEDOWN
     
-#### execute a lirc command
+#### send a key
 
     irsend SEND_ONCE cambridge_cxa KEY_VOLUMEDOWN
 
 The front facing camera on iPhone doesn't filter IR.
 It showed the raspberry pi is lighting the transmit infrared LED.
-However the remote configuration cambridge_cxa doesn't work with my Polk receiver.
+However the remote configuration cambridge_cxa doesn't work with my Polk sound bar receiver.
     
 #### Disable incorrect remote configuration files
 https://learn.adafruit.com/using-an-ir-remote-with-a-raspberry-pi-media-center/using-other-remotes
@@ -113,6 +114,10 @@ LIRC command irrecord records button press infrared signals. http://www.lirc.org
 
     sudo killall -9 lircd
 
+##### list valid key names that are available to be assigned to a remote configuration file
+
+    irrecord --list-namespace
+    
 ##### irrecord -d didn't work with polk remote, it never got enough info to make a .conf file.
 In repo remy_python I added directory config to keep polk.lircd.conf in version control.
 
@@ -138,9 +143,16 @@ Then copy updated file to
 
     /etc/lirc/lircd.conf.d/polk.lircd.conf
 
-### list valid key names
+### list polk configuration defined keys
 
-    irrecord --list-namespace
+    irsend list polk ""
+
+    0000000000000001 KEY_MUTE
+    0000000000000002 KEY_POWER
+    0000000000000003 KEY_VOLUMEUP
+    0000000000000004 KEY_VOLUMEDOWN
+    0000000000000005 KEY_UP
+    0000000000000006 KEY_DOWN
 
 ## Remote control service
 
