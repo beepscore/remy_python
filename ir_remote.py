@@ -35,14 +35,19 @@ def ir_command(command):
 
 def transmit_command_ir(command):
     """
-    instruct infrared transmitter to transmit command
-    :parameter command: an IrCommand
+    Instructs infrared transmitter to transmit command
+    Calls LIRC irsend via subprocess.
+    Doesn't allow user to run arbitrary string input, that is a security risk.
+    :parameter command: typically an IrCommand. User could supply arbitrary string
     """
 
+    # ir_command(command) translates and "sanitizes" command
     ir_command_string = ir_command(command)
 
-    # Don't allow user to run arbitrary string input, that is a security risk.
-    #
+    if ir_command_string is None:
+        # command unrecognized
+        return
+
     # If LIRC irsend isn't installed, throws error:
     # FileNotFoundError: [Errno 2] No such file or directory: 'irsend': 'irsend'
     #
