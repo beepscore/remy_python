@@ -50,7 +50,7 @@ def transmit_command_ir(command):
     # translate and "sanitize" command
     ir_command_string = ir_command(command)
 
-    logger.debug('command: {}\n'.format(command))
+    logger.debug('command: {}'.format(command))
     # e.g.
     # 2019-02-16 13:36:02 DEBUG    transmit_command_ir line:58 command: RemoteCommand.MUTE
 
