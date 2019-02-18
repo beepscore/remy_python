@@ -10,7 +10,6 @@ The Python app has three parts:
 - A scheduler that automatically sends remote control commands at programmed times (e.g. mute during TV commercials)
 
 # Results
-Michael Traver's excellent "Raspberry Pi IR Remote Control" https://github.com/mtraver/rpi-ir-remote has helpful up to date suggestions for configuring current versions of LIRC (0.9.4) and Raspbian (Stretch) and warnings about outdated online info.
 
 ## Infrared transmitter
 
@@ -28,6 +27,7 @@ Alternatively, can connect from another computer on local network via ssh.
     ssh -v pi@10.0.0.4
     
 ### install LIRC
+Michael Traver's excellent "Raspberry Pi IR Remote Control" https://github.com/mtraver/rpi-ir-remote has helpful up to date suggestions for configuring current versions of LIRC (0.9.4) and Raspbian (Stretch) and warnings about outdated online info.
 
     sudo apt-get install lirc
     The following additional packages will be installed:
