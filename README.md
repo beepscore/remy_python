@@ -334,3 +334,19 @@ https://github.com/CorrosiveKid/raspberrypi-gpio-api
 #### Raspberry Pi Web Server using Flask to Control GPIOs
 http://randomnerdtutorials.com/raspberry-pi-web-server-using-flask-to-control-gpios/
 
+## Inspirational projects
+
+### Enough Already by Matt Richardson
+https://makezine.com/2011/08/16/enough-already-the-arduino-solution-to-overexposed-celebs/
+
+### CCExtractor
+https://www.ccextractor.org/
+
+#### Cool external projects that use subtitles or do sorcery with a video stream
+https://www.ccextractor.org/public:general:coollinkswithsubfs
+
+### TV-B-Gone Kit
+https://www.adafruit.com/product/73
+
+### TV-B-Gone
+https://www.tvbgone.com/
