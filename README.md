@@ -12,7 +12,7 @@ The Python app has three parts:
 # Results
 Michael Traver's excellent "Raspberry Pi IR Remote Control" https://github.com/mtraver/rpi-ir-remote has helpful up to date suggestions for configuring current versions of LIRC (0.9.4) and Raspbian (Stretch) and warnings about outdated online info.
 
-## Infrared remote
+## Infrared transmitter
 
 ### Install hardware
 Raspberry Pi IR Control Expansion Board. This uses gpio pins 17 out (IR LED), pin 18 in (IR receiver).
@@ -92,9 +92,9 @@ To disable a configuration file change extension from .conf to e.g. .dist
     cd /etc/lirc/lircd.conf.d
     sudo mv devinput.lircd.conf devinput.lircd.dist
     
-### Generate a new configuration file.
+### Use infrared receiver to generate a new configuration file.
 lirc-remotes has lots of files, but none named polk. Could try existing ones but this could be time consuming.
-Instead use an existing handheld remote to "teach" the Raspberry Pi how to act like that remote.
+Instead use an existing handheld remote transmitter to "teach" the Raspberry Pi how to act like that remote.
 The Raspberry Pi IR Control Expansion Board has an infrared receiver.
 LIRC command irrecord records button press infrared signals. http://www.lirc.org/html/irrecord.html
 
@@ -154,7 +154,7 @@ Then copy updated file to
     0000000000000005 KEY_UP
     0000000000000006 KEY_DOWN
 
-## Remote control service
+## Flask web service
 
 cd to project directory
 
@@ -189,7 +189,7 @@ Send a remote control command.
                         /api/v1/tv/volume-increase/
 
 ### client
-GET requests can be made via a browser such as Firefox or mobile Safari
+GET requests can be made via a browser such as Firefox or mobile Safari.
 POST requests can be made via clients such as terminal curl or POSTMAN or iOS Remy.app
 
     curl --request POST http://10.0.0.4:5000/api/v1/tv/volume-decrease/
@@ -225,7 +225,7 @@ Currently unused. Could be used together with closed caption text or speech reco
 Some commercials don't say product/service/company name until late in the commercial.
 
 ## unit tests
-Can run tests on macOS by temporarily commenting out service.py subprocess.call(irsend)
+Can run tests on macOS by temporarily commenting out service.py subprocess.call(irsend).
 Not sure how to run tests on pi yet.
 
     python -m unittest discover
