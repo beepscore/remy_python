@@ -21,13 +21,8 @@ def get_quiet_times(filename):
     with open(filename, 'r') as f:
         quiet_times_from_json = json.load(f)
 
-    quiet_times = []
-
-    for quiet_time_dict in quiet_times_from_json:
-
-        quiet_time = quiet_time_from_dict(quiet_time_dict)
-        quiet_times.append(quiet_time)
-
+    # list comprehension
+    quiet_times = [quiet_time_from_dict(x) for x in quiet_times_from_json]
     return quiet_times
 
 
