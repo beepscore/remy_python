@@ -3,7 +3,7 @@ Make a Raspberry Pi infrared remote control.
 The device can programmatically control television sound bar audio volume.
 The Raspberry Pi uses LIRC (Linux Infrared Remote Control) to send commands to an attached infrared transmitter.
 
-The Python app has three parts:
+The Python app has three main parts:
 
 - Functions to send commands to the infrared transmitter, which then transmits the commands to the television sound bar
 - A Flask web service to accept television command requests (e.g. volume decrease, volume increase)
