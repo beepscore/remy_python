@@ -26,6 +26,5 @@
  {"start": {"hour": 21, "minute": 27, "second": 0}, "duration": {"minutes": 3, "seconds": 0}},
  {"start": {"hour": 21, "minute": 34, "second": 30}, "duration": {"minutes": 3, "seconds": 0}},
  {"start": {"hour": 21, "minute": 48, "second": 0}, "duration": {"minutes": 3, "seconds": 0}},
- {"start": {"hour": 21, "minute": 54, "second": 20}, "duration": {"minutes": 3, "seconds": 0}},
- {"start": {"hour": 22, "minute": 54, "second": 20}, "duration": {"minutes": 3, "seconds": 0}}
+ {"start": {"hour": 21, "minute": 54, "second": 20}, "duration": {"minutes": 3, "seconds": 0}}
 ]
