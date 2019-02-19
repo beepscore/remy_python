@@ -6,6 +6,7 @@
 # https://apscheduler.readthedocs.io/en/latest/userguide.html
 from apscheduler.schedulers.background import BackgroundScheduler
 
+import json
 import datetime
 
 from collections import namedtuple
@@ -16,49 +17,6 @@ cron = 'cron'
 day_of_week = 'mon-sun'
 
 QuietTime = namedtuple('QuietTime', 'start end')
-
-# datetime.time: An idealized time, independent of any particular day
-# TODO: consider read quiet_times from a json file
-quiet_times17 = [
-    # observed Sunday
-    QuietTime(datetime.time(hour=17, minute=17, second=0), datetime.time(hour=17, minute=20, second=0)),
-    QuietTime(datetime.time(hour=17, minute=27, second=0), datetime.time(hour=17, minute=31, second=20)),
-    QuietTime(datetime.time(hour=17, minute=38, second=15), datetime.time(hour=17, minute=41, second=45)),
-    QuietTime(datetime.time(hour=17, minute=48, second=0), datetime.time(hour=17, minute=51, second=50)),
-    QuietTime(datetime.time(hour=17, minute=54, second=20), datetime.time(hour=17, minute=57, second=50))
-]
-
-quiet_times18 = [
-    QuietTime(datetime.time(hour=18, minute=7, second=0), datetime.time(hour=18, minute=10, second=0)),
-    QuietTime(datetime.time(hour=18, minute=17, second=0), datetime.time(hour=18, minute=20, second=0)),
-    QuietTime(datetime.time(hour=18, minute=27, second=0), datetime.time(hour=18, minute=31, second=20)),
-    QuietTime(datetime.time(hour=18, minute=38, second=15), datetime.time(hour=18, minute=41, second=45)),
-    QuietTime(datetime.time(hour=18, minute=48, second=0), datetime.time(hour=18, minute=51, second=50)),
-    QuietTime(datetime.time(hour=18, minute=54, second=20), datetime.time(hour=18, minute=57, second=50))
-]
-
-quiet_times19 = [
-    QuietTime(datetime.time(hour=19, minute=7, second=0), datetime.time(hour=19, minute=10, second=0)),
-    QuietTime(datetime.time(hour=19, minute=17, second=0), datetime.time(hour=19, minute=20, second=0)),
-    QuietTime(datetime.time(hour=19, minute=27, second=0), datetime.time(hour=19, minute=31, second=20)),
-    QuietTime(datetime.time(hour=19, minute=38, second=15), datetime.time(hour=19, minute=41, second=45)),
-    QuietTime(datetime.time(hour=19, minute=48, second=0), datetime.time(hour=19, minute=51, second=50)),
-    QuietTime(datetime.time(hour=19, minute=54, second=20), datetime.time(hour=19, minute=57, second=50))
-]
-
-quiet_times20 = [
-    # observed Monday
-    QuietTime(datetime.time(hour=20, minute=15, second=40), datetime.time(hour=20, minute=19, second=0)),
-    QuietTime(datetime.time(hour=20, minute=24, second=50), datetime.time(hour=20, minute=28, second=20)),
-    QuietTime(datetime.time(hour=20, minute=36, second=0), datetime.time(hour=20, minute=39, second=30)),
-    QuietTime(datetime.time(hour=20, minute=48, second=15), datetime.time(hour=20, minute=51, second=20)),
-    QuietTime(datetime.time(hour=20, minute=54, second=10), datetime.time(hour=20, minute=57, second=50))
-]
-
-quiet_times21 = [
-    # observed Monday
-    QuietTime(datetime.time(hour=21, minute=25, second=45), datetime.time(hour=21, minute=29, second=40))
-]
 
 
 def schedule_jobs():
@@ -80,8 +38,60 @@ def add_jobs_ir_remote(scheduler):
     """
     # add_jobs_volume(quiet_times18, scheduler)
 
-    quiet_times = quiet_times17 + quiet_times18 + quiet_times19 + quiet_times20 + quiet_times21
+    quiet_times = get_quiet_times('./data/quiet_times.json')
     add_jobs_mute(quiet_times, scheduler)
+
+
+def get_quiet_times(filename):
+    """
+    reads a json text file of the form
+    [
+        {"start": {"hour": 17, "minute": 17, "second": 0}, "end": {"hour": 17, "minute": 20, "second": 0}},
+        {"start": {"hour": 17, "minute": 27, "second": 0}, "end": {"hour": 17, "minute": 31, "second": 20}},
+    ]
+    :param filename: a string, e.g. './data/quiet_times.json'
+    :return: a list of QuietTime
+    """
+    with open(filename, 'r') as f:
+        quiet_times_from_json = json.load(f)
+
+    quiet_times = []
+
+    for quiet_time_dict in quiet_times_from_json:
+
+        quiet_time = quiet_time_from_dict(quiet_time_dict)
+        quiet_times.append(quiet_time)
+
+    return quiet_times
+
+
+def quiet_time_from_dict(quiet_time_dict):
+    """
+    :param quiet_time_dict: a dictionary of the form
+    {"hour": 17, "minute": 27, "second": 0}, "end": {"hour": 17, "minute": 31, "second": 20}
+    :return: a QuietTime
+    """
+    start_dict = quiet_time_dict.get("start")
+    end_dict = quiet_time_dict.get("end")
+
+    start_time = time_from_dict(start_dict)
+    end_time = time_from_dict(end_dict)
+
+    quiet_time = QuietTime(start_time, end_time)
+    return quiet_time
+
+
+def time_from_dict(time_dict):
+    """
+    :param time_dict: a dictionary of the form
+    {"hour": 17, "minute": 27, "second": 0}
+    :return: a datetime.time
+    """
+    # datetime.time: An idealized time, independent of any particular day
+    date_time_time = datetime.time(hour=time_dict.get("hour"),
+                                   minute=time_dict.get("minute"),
+                                   second=time_dict.get("second"))
+    return date_time_time
 
 
 def add_jobs_volume(quiet_times, scheduler):
