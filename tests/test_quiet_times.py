@@ -11,9 +11,9 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(17, times[1].start.hour)
         self.assertEqual(27, times[1].start.minute)
         self.assertEqual(0, times[1].start.second)
-        self.assertEqual(17, times[1].end.hour)
-        self.assertEqual(31, times[1].end.minute)
-        self.assertEqual(20, times[1].end.second)
+
+        self.assertEqual(240, times[1].duration.seconds)
+        self.assertEqual(180, times[2].duration.seconds)
 
 
 if __name__ == '__main__':
