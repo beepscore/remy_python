@@ -29,7 +29,7 @@ def get_quiet_times(filename):
 def quiet_time_from_dict(quiet_time_dict):
     """
     :param quiet_time_dict: a dictionary of the form
-    {"hour": 17, "minute": 27, "second": 0}, "end": {"hour": 17, "minute": 31, "second": 20}
+    {"start": {"hour": 17, "minute": 27, "second": 0}, "end": {"hour": 17, "minute": 31, "second": 20}}
     :return: a QuietTime
     """
     start_dict = quiet_time_dict.get("start")
