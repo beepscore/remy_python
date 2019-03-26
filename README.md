@@ -334,19 +334,45 @@ https://github.com/CorrosiveKid/raspberrypi-gpio-api
 #### Raspberry Pi Web Server using Flask to Control GPIOs
 http://randomnerdtutorials.com/raspberry-pi-web-server-using-flask-to-control-gpios/
 
+## Commercial recognition techniques
+
+### Acoustic fingerprint
+https://en.wikipedia.org/wiki/Acoustic_fingerprint
+
+#### Audio Fingerprinting with Python and Numpy
+https://willdrevo.com/fingerprinting-and-audio-recognition-with-python/
+
+#### Sonograms and Audio fingerprinting
+https://github.com/worldveil/dejavu
+
+#### An Industrial-Strength Audio Search Algorithm
+http://www.ee.columbia.edu/~dpwe/papers/Wang03-shazam.pdf
+
+https://stackoverflow.com/questions/54718744/python-audio-analysis-find-real-time-values-of-the-strongest-beat-in-each-meter
+
+### subtitles
+
+#### CCExtractor
+https://www.ccextractor.org/
+
+## video analysis
+### ComSkip
+https://github.com/erikkaashoek/Comskip
+
+### How to Automatically Skip Commercials in NextPVR with Comskip
+https://www.howtogeek.com/251405/how-to-automatically-skip-commercials-in-nextpvr-with-comskip/
+
+##### Cool external projects that use subtitles or do sorcery with a video stream
+https://www.ccextractor.org/public:general:coollinkswithsubfs
+
 ## Inspirational projects
 
 ### Enough Already by Matt Richardson
 https://makezine.com/2011/08/16/enough-already-the-arduino-solution-to-overexposed-celebs/
-
-### CCExtractor
-https://www.ccextractor.org/
-
-#### Cool external projects that use subtitles or do sorcery with a video stream
-https://www.ccextractor.org/public:general:coollinkswithsubfs
 
 ### TV-B-Gone Kit
 https://www.adafruit.com/product/73
 
 ### TV-B-Gone
 https://www.tvbgone.com/
+
