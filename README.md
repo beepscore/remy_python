@@ -343,6 +343,8 @@ https://en.wikipedia.org/wiki/Acoustic_fingerprint
 https://willdrevo.com/fingerprinting-and-audio-recognition-with-python/
 
 #### Sonograms and Audio fingerprinting
+##### 2019-03 bcollazo/dejavu appears to be the most active fork of worldveil/dejavu
+https://github.com/bcollazo/dejavu
 https://github.com/DataWookie/dejavu
 
 #### An Industrial-Strength Audio Search Algorithm
