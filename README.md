@@ -240,6 +240,12 @@ http://beepscore.com/website/2019/02/03/raspberry-pi-infrared-remote-control-tv.
 ## Network enabled Raspberry Pi tv remote control
 http://beepscore.com/website/2019/02/05/network-enabled-raspberry-pi-tv-remote-control.html
 
+## Python Data Analysis to Automatically Detect Television Commercials
+http://beepscore.com/website/2019/04/21/automatically-detecting-television-commercials.html
+
+## tv_commercial_silencer
+https://github.com/beepscore/tv_commercial_silencer
+
 ## Remy
 Remote control television by sending commands from iOS device to a server.
 https://github.com/beepscore/Remy
@@ -333,39 +339,6 @@ https://github.com/CorrosiveKid/raspberrypi-gpio-api
 
 #### Raspberry Pi Web Server using Flask to Control GPIOs
 http://randomnerdtutorials.com/raspberry-pi-web-server-using-flask-to-control-gpios/
-
-## Commercial recognition techniques
-
-### Acoustic fingerprint
-https://en.wikipedia.org/wiki/Acoustic_fingerprint
-
-#### Audio Fingerprinting with Python and Numpy
-https://willdrevo.com/fingerprinting-and-audio-recognition-with-python/
-
-#### Sonograms and Audio fingerprinting
-##### 2019-03 bcollazo/dejavu appears to be the most active fork of worldveil/dejavu
-https://github.com/bcollazo/dejavu
-https://github.com/DataWookie/dejavu
-
-#### An Industrial-Strength Audio Search Algorithm
-http://www.ee.columbia.edu/~dpwe/papers/Wang03-shazam.pdf
-
-https://stackoverflow.com/questions/54718744/python-audio-analysis-find-real-time-values-of-the-strongest-beat-in-each-meter
-
-### subtitles
-
-#### CCExtractor
-https://www.ccextractor.org/
-
-## video analysis
-### ComSkip
-https://github.com/erikkaashoek/Comskip
-
-### How to Automatically Skip Commercials in NextPVR with Comskip
-https://www.howtogeek.com/251405/how-to-automatically-skip-commercials-in-nextpvr-with-comskip/
-
-##### Cool external projects that use subtitles or do sorcery with a video stream
-https://www.ccextractor.org/public:general:coollinkswithsubfs
 
 ## Inspirational projects
 
