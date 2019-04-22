@@ -240,7 +240,7 @@ http://beepscore.com/website/2019/02/03/raspberry-pi-infrared-remote-control-tv.
 ## Network enabled Raspberry Pi tv remote control
 http://beepscore.com/website/2019/02/05/network-enabled-raspberry-pi-tv-remote-control.html
 
-## Python Data Analysis to Automatically Detect Television Commercials
+## Python Data Analysis to Automatically Detect and Mute Television Commercials
 http://beepscore.com/website/2019/04/21/automatically-detecting-television-commercials.html
 
 ## tv_commercial_silencer
