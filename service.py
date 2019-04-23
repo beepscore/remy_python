@@ -103,9 +103,11 @@ def volume_increase():
 
 if __name__ == '__main__':
 
-    scheduler.schedule_jobs()
+    # runs jobs at scheduled times
+    # scheduler.schedule_jobs()
 
     try:
+        # start Flask web service
         # '0.0.0.0' accessible to any device on the network
         app.run(host='0.0.0.0', debug=True)
     except RuntimeError:
