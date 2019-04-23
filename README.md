@@ -154,8 +154,12 @@ Then copy updated file to
     0000000000000005 KEY_UP
     0000000000000006 KEY_DOWN
 
-## Flask web service
+## To run Flask web service
 
+### connect to raspberry pi
+
+    ssh -v pi@10.0.0.4
+    
 cd to project directory
 
     cd ~/beepscore/remy_python
