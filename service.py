@@ -5,6 +5,7 @@ and instruct a transmitter (e.g. infrared) to transmit command
 """
 
 from flask import Flask, jsonify, request
+import flask_util
 
 from remote_command import RemoteCommand
 from ir_remote import transmit_command_ir
@@ -15,20 +16,13 @@ import scheduler
 # app is a flask object
 app = Flask(__name__)
 
-API_NAME_KEY = 'api_name'
-RESPONSE_KEY = 'response'
-VERSION_KEY = 'version'
-
-API_NAME = 'tv'
-VERSION = '1.0'
-
 
 def route(command):
     """
     :param command: a RemoteCommand
     :return: route string
     """
-    return "/api/v1/{}/{}/".format(API_NAME, command.value)
+    return "/api/v1/{}/{}/".format(flask_util.ServiceConstants.API_NAME, command.value)
 
 
 def transmit_command(command):
@@ -44,14 +38,10 @@ def transmit_command(command):
     transmit_command_ir(command)
 
     # f string requires Python >= 3.6, so don't use it yet.
-    # response = f'transmitted command {command}'
-    response = 'transmitted command {}'.format(command.value)
+    # response_string = f'transmitted command {command}'
+    response_string = 'transmitted command {}'.format(command.value)
 
-    data = {API_NAME_KEY: API_NAME,
-            VERSION_KEY: VERSION,
-            RESPONSE_KEY: response}
-
-    return jsonify(data)
+    return flask_util.flask_response(response_string)
 
 
 # / is the website root, the entry point
@@ -59,14 +49,10 @@ def transmit_command(command):
 # home http://127.0.0.1
 # port :5000
 @app.route('/')
-@app.route("/api/v1/{}/ping/".format(API_NAME), methods=['GET'])
+@app.route("/api/v1/{}/ping/".format(flask_util.ServiceConstants.API_NAME), methods=['GET'])
 def api_status():
     if request.method == 'GET':
-        data = {API_NAME_KEY: API_NAME,
-                VERSION_KEY: VERSION,
-                RESPONSE_KEY: 'pong'}
-
-        return jsonify(data)
+        return flask_util.flask_response('pong')
 
 
 # POST but not GET because GET should not change any state on the server
