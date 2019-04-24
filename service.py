@@ -104,7 +104,8 @@ def volume_increase():
 if __name__ == '__main__':
 
     # runs jobs at scheduled times
-    # scheduler.schedule_jobs()
+    scheduler = scheduler.Scheduler()
+    scheduler.schedule_jobs()
 
     try:
         # start Flask web service
