@@ -9,6 +9,7 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from remote_command import RemoteCommand
 from ir_remote import transmit_command_ir
 import quiet_times
+import time
 
 
 class Scheduler:
@@ -85,6 +86,28 @@ class Scheduler:
                                               hour=quiet_time.end.hour, minute=quiet_time.end.minute,
                                               second=quiet_time.end.second,
                                               args=[RemoteCommand.MUTE])
+
+    @staticmethod
+    def volume_decrease_increase(decrease_count=4, increase_count=3, duration_seconds=30):
+        """
+        decreases volume for duration_seconds, then increases volume
+        :param decrease_count: number of times to send volume decrease command
+        ok if decrease_count is greater than number needed to decrease volume to silent.
+        :param increase_count: number of times to send volume increase command
+        :param duration_seconds: time between last decrease volume and first increase volume
+            e.g. caller can pass duration of commercial
+        """
+        for i in range(0, decrease_count):
+            transmit_command_ir(RemoteCommand.VOLUME_DECREASE)
+            time.sleep(5)
+
+        # TODO: use scheduler instead of sleep() to keep app service responsive to other requests
+        # temp_scheduler = Scheduler()
+        time.sleep(5)
+
+        for i in range(0, increase_count):
+            transmit_command_ir(RemoteCommand.VOLUME_INCREASE)
+            time.sleep(5)
 
 
 if __name__ == '__main__':
