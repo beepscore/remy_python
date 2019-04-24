@@ -55,7 +55,7 @@ def transmit_command(command):
 
 
 # / is the website root, the entry point
-# http://127.0.0.1:5000
+# http://10.0.0.4:5000
 # home http://127.0.0.1
 # port :5000
 @app.route('/')
