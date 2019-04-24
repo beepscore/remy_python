@@ -22,7 +22,7 @@ def route(command):
     :param command: a RemoteCommand
     :return: route string
     """
-    return "/api/v1/{}/{}/".format(flask_util.ServiceConstants.API_NAME, command.value)
+    return "/api/v1/{}/{}/".format(flask_util.ServiceConstants.API_NAME.value, command.value)
 
 
 def transmit_command(command):
@@ -45,11 +45,11 @@ def transmit_command(command):
 
 
 # / is the website root, the entry point
-# http://127.0.0.1:5000
+# http://10.0.0.4:5000
 # home http://127.0.0.1
 # port :5000
 @app.route('/')
-@app.route("/api/v1/{}/ping/".format(flask_util.ServiceConstants.API_NAME), methods=['GET'])
+@app.route("/api/v1/{}/ping/".format(flask_util.ServiceConstants.API_NAME.value), methods=['GET'])
 def api_status():
     if request.method == 'GET':
         return flask_util.flask_response('pong')
@@ -87,8 +87,8 @@ def volume_increase():
     return transmit_command(RemoteCommand.VOLUME_INCREASE)
 
 
-@app.route("/api/v1/{}/volume-decrease-increase/".format(flask_util.ServiceConstants.API_NAME), methods=['POST'])
-def volume_duck():
+@app.route("/api/v1/{}/volume-decrease-increase/".format(flask_util.ServiceConstants.API_NAME.value), methods=['POST'])
+def volume_decrease_increase():
     return scheduler.Scheduler.volume_decrease_increase(decrease_count=4, increase_count=3, duration_seconds=10)
 
 
