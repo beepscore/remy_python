@@ -10,6 +10,8 @@ from remote_command import RemoteCommand
 from ir_remote import transmit_command_ir
 import quiet_times
 import time
+import service_constants
+from flask import jsonify
 
 
 class Scheduler:
@@ -108,6 +110,12 @@ class Scheduler:
         for i in range(0, increase_count):
             transmit_command_ir(RemoteCommand.VOLUME_INCREASE)
             time.sleep(5)
+
+        data = {service_constants.API_NAME_KEY: service_constants.API_NAME,
+                service_constants.VERSION_KEY: service_constants.VERSION,
+                service_constants.RESPONSE_KEY: 'volume-decrease-increase'}
+
+        return jsonify(data)
 
 
 if __name__ == '__main__':
