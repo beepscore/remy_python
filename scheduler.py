@@ -9,6 +9,7 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from remote_command import RemoteCommand
 from ir_remote import transmit_command_ir
 import quiet_times
+import flask_util
 import time
 
 
@@ -108,6 +109,9 @@ class Scheduler:
         for i in range(0, increase_count):
             transmit_command_ir(RemoteCommand.VOLUME_INCREASE)
             time.sleep(5)
+
+        # TODO: check if returning here fixes ValueError: View function did not return a response
+        return flask_util.flask_response('volume-decrease-increase')
 
 
 if __name__ == '__main__':
