@@ -87,7 +87,7 @@ def volume_increase():
     return transmit_command(RemoteCommand.VOLUME_INCREASE)
 
 
-@app.route("/api/v1/{}/volume-decrease-increase/".format(API_NAME), methods=['POST'])
+@app.route("/api/v1/{}/volume-decrease-increase/".format(flask_util.ServiceConstants.API_NAME), methods=['POST'])
 def volume_duck():
     return scheduler.Scheduler.volume_decrease_increase(decrease_count=4, increase_count=3, duration_seconds=10)
 
