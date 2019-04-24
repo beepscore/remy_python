@@ -10,17 +10,11 @@ from remote_command import RemoteCommand
 from ir_remote import transmit_command_ir
 
 import scheduler
+import service_constants
 
 
 # app is a flask object
 app = Flask(__name__)
-
-API_NAME_KEY = 'api_name'
-RESPONSE_KEY = 'response'
-VERSION_KEY = 'version'
-
-API_NAME = 'tv'
-VERSION = '1.0'
 
 
 def route(command):
@@ -28,7 +22,7 @@ def route(command):
     :param command: a RemoteCommand
     :return: route string
     """
-    return "/api/v1/{}/{}/".format(API_NAME, command.value)
+    return "/api/v1/{}/{}/".format(service_constants.API_NAME, command.value)
 
 
 def transmit_command(command):
@@ -47,9 +41,9 @@ def transmit_command(command):
     # response = f'transmitted command {command}'
     response = 'transmitted command {}'.format(command.value)
 
-    data = {API_NAME_KEY: API_NAME,
-            VERSION_KEY: VERSION,
-            RESPONSE_KEY: response}
+    data = {service_constants.API_NAME_KEY: service_constants.API_NAME,
+            service_constants.VERSION_KEY: service_constants.VERSION,
+            service_constants.RESPONSE_KEY: response}
 
     return jsonify(data)
 
@@ -59,12 +53,12 @@ def transmit_command(command):
 # home http://127.0.0.1
 # port :5000
 @app.route('/')
-@app.route("/api/v1/{}/ping/".format(API_NAME), methods=['GET'])
+@app.route("/api/v1/{}/ping/".format(service_constants.API_NAME), methods=['GET'])
 def api_status():
     if request.method == 'GET':
-        data = {API_NAME_KEY: API_NAME,
-                VERSION_KEY: VERSION,
-                RESPONSE_KEY: 'pong'}
+        data = {service_constants.API_NAME_KEY: service_constants.API_NAME,
+                service_constants.VERSION_KEY: service_constants.VERSION,
+                service_constants.RESPONSE_KEY: 'pong'}
 
         return jsonify(data)
 
@@ -101,7 +95,7 @@ def volume_increase():
     return transmit_command(RemoteCommand.VOLUME_INCREASE)
 
 
-@app.route("/api/v1/{}/volume-decrease-increase/".format(API_NAME), methods=['POST'])
+@app.route("/api/v1/{}/volume-decrease-increase/".format(service_constants.API_NAME), methods=['POST'])
 def volume_decrease_increase():
     return scheduler.Scheduler.volume_decrease_increase(decrease_count=4, increase_count=3, duration_seconds=10)
 
