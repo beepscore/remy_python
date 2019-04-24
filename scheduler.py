@@ -101,7 +101,7 @@ class Scheduler:
         """
         for i in range(0, decrease_count):
             transmit_command_ir(RemoteCommand.VOLUME_DECREASE)
-            time.sleep(5)
+            time.sleep(1)
 
         # TODO: use scheduler instead of sleep() to keep app service responsive to other requests
         # temp_scheduler = Scheduler()
@@ -109,8 +109,9 @@ class Scheduler:
 
         for i in range(0, increase_count):
             transmit_command_ir(RemoteCommand.VOLUME_INCREASE)
-            time.sleep(5)
+            time.sleep(1)
 
+        # TODO: consider extract a helper method to construct a response e.g. flask_response(response_string)
         data = {service_constants.API_NAME_KEY: service_constants.API_NAME,
                 service_constants.VERSION_KEY: service_constants.VERSION,
                 service_constants.RESPONSE_KEY: 'volume-decrease-increase'}
