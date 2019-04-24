@@ -102,7 +102,7 @@ def volume_increase():
 
 
 @app.route("/api/v1/{}/volume-decrease-increase/".format(API_NAME), methods=['POST'])
-def volume_duck():
+def volume_decrease_increase():
     return scheduler.Scheduler.volume_decrease_increase(decrease_count=4, increase_count=3, duration_seconds=10)
 
 
