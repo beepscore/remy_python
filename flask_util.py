@@ -18,11 +18,10 @@ def flask_response(response_string):
     :param response_string:
     :return: a flask.Response object
     """
-    data = {ServiceConstants.API_NAME_KEY.value: ServiceConstants.API_NAME.value,
-            ServiceConstants.VERSION_KEY.value: ServiceConstants.VERSION.value,
-            ServiceConstants.RESPONSE_KEY.value: response_string.value}
+    data = {ServiceConstants.API_NAME_KEY: ServiceConstants.API_NAME,
+            ServiceConstants.VERSION_KEY: ServiceConstants.VERSION,
+            ServiceConstants.RESPONSE_KEY: response_string}
 
-    print('flask_response data: {}'.format(data))
     json = jsonify(data)
     return json
 
