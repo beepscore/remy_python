@@ -92,15 +92,16 @@ class Scheduler:
                                               second=quiet_time.end.second,
                                               args=[RemoteCommand.MUTE])
 
-    def volume_decrease_increase(self, decrease_count=4, increase_count=3, duration_seconds=15):
+    def volume_decrease_increase(self, duration_seconds, decrease_count=4, increase_count=3):
         """
         decreases volume for duration_seconds, then increases volume
+        :param duration_seconds: time between last decrease volume and first increase volume
+            e.g. caller can pass duration of commercial
         :param decrease_count: number of times to send volume decrease command
         ok if decrease_count is greater than number needed to decrease volume to silent.
         :param increase_count: number of times to send volume increase command
-        :param duration_seconds: time between last decrease volume and first increase volume
-            e.g. caller can pass duration of commercial
         """
+
         # may be used to allow time to transmit command
         command_transmission_delay_seconds = 1
 
@@ -112,6 +113,8 @@ class Scheduler:
             # args is for function transmit_command_ir
             self.background_scheduler.add_job(transmit_command_ir, 'date', run_date=run_date,
                                               args=[RemoteCommand.VOLUME_DECREASE])
+
+        duration_seconds = 15 if duration_seconds is None else duration_seconds
 
         for i in range(0, increase_count):
             run_date = datetime.now() + timedelta(seconds=(duration_seconds + (i * command_transmission_delay_seconds)))

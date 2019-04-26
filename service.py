@@ -11,6 +11,11 @@ from ir_remote import transmit_command_ir
 
 import scheduler
 import service_constants
+import logging_util
+
+# instantiate at module level, not class level
+# https://stackoverflow.com/questions/22807972/python-best-practice-in-terms-of-logging
+logger = logging_util.get_logger(__name__)
 
 # app is a flask object
 app = Flask(__name__)
@@ -98,7 +103,14 @@ def volume_increase():
 
 @app.route("/api/v1/{}/volume-decrease-increase/".format(service_constants.API_NAME), methods=['POST'])
 def volume_decrease_increase():
-    return scheduler.volume_decrease_increase(decrease_count=4, increase_count=3, duration_seconds=10)
+    # apparently route decorator adds reference to "request"
+    post_data_dict = request.form
+
+    # spell dictionary key duration-seconds with '-' similar to headers convention
+    duration_seconds = post_data_dict.get['duration-seconds']
+    logger.debug('duration_seconds: {}'.format(duration_seconds))
+
+    return scheduler.volume_decrease_increase(duration_seconds=duration_seconds, decrease_count=4, increase_count=3)
 
 
 if __name__ == '__main__':
