@@ -107,7 +107,7 @@ def volume_decrease_increase():
     post_data_dict = request.form
 
     # spell dictionary key duration-seconds with '-' similar to headers convention
-    duration_seconds = post_data_dict.get['duration-seconds']
+    duration_seconds = post_data_dict.get('duration-seconds')
     logger.debug('duration_seconds: {}'.format(duration_seconds))
 
     return scheduler.volume_decrease_increase(duration_seconds=duration_seconds, decrease_count=4, increase_count=3)
