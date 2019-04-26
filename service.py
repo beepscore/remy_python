@@ -12,9 +12,10 @@ from ir_remote import transmit_command_ir
 import scheduler
 import service_constants
 
-
 # app is a flask object
 app = Flask(__name__)
+
+scheduler = scheduler.Scheduler()
 
 
 def route(command):
@@ -97,13 +98,12 @@ def volume_increase():
 
 @app.route("/api/v1/{}/volume-decrease-increase/".format(service_constants.API_NAME), methods=['POST'])
 def volume_decrease_increase():
-    return scheduler.Scheduler.volume_decrease_increase(decrease_count=4, increase_count=3, duration_seconds=10)
+    return scheduler.volume_decrease_increase(decrease_count=4, increase_count=3, duration_seconds=10)
 
 
 if __name__ == '__main__':
 
-    # runs jobs at scheduled times
-    # scheduler = scheduler.Scheduler()
+    # optionally schedule jobs at pre-defined times
     # scheduler.schedule_jobs()
 
     try:

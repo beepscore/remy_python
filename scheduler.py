@@ -9,7 +9,10 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from remote_command import RemoteCommand
 from ir_remote import transmit_command_ir
 import quiet_times
-import time
+
+from datetime import datetime
+from datetime import timedelta
+
 import service_constants
 from flask import jsonify
 
@@ -89,8 +92,7 @@ class Scheduler:
                                               second=quiet_time.end.second,
                                               args=[RemoteCommand.MUTE])
 
-    @staticmethod
-    def volume_decrease_increase(decrease_count=4, increase_count=3, duration_seconds=30):
+    def volume_decrease_increase(self, decrease_count=4, increase_count=3, duration_seconds=15):
         """
         decreases volume for duration_seconds, then increases volume
         :param decrease_count: number of times to send volume decrease command
@@ -99,17 +101,22 @@ class Scheduler:
         :param duration_seconds: time between last decrease volume and first increase volume
             e.g. caller can pass duration of commercial
         """
-        for i in range(0, decrease_count):
-            transmit_command_ir(RemoteCommand.VOLUME_DECREASE)
-            time.sleep(1)
+        # may be used to allow time to transmit command
+        command_transmission_delay_seconds = 1
 
-        # TODO: use scheduler instead of sleep() to keep app service responsive to other requests
-        # temp_scheduler = Scheduler()
-        time.sleep(5)
+        # Use scheduler instead of sleep() to keep app service responsive to other requests
+
+        for i in range(0, decrease_count):
+            run_date = datetime.now() + timedelta(seconds=i * command_transmission_delay_seconds)
+            # add_job, implicitly create the trigger
+            # args is for function transmit_command_ir
+            self.background_scheduler.add_job(transmit_command_ir, 'date', run_date=run_date,
+                                              args=[RemoteCommand.VOLUME_DECREASE])
 
         for i in range(0, increase_count):
-            transmit_command_ir(RemoteCommand.VOLUME_INCREASE)
-            time.sleep(1)
+            run_date = datetime.now() + timedelta(seconds=(duration_seconds + (i * command_transmission_delay_seconds)))
+            self.background_scheduler.add_job(transmit_command_ir, 'date', run_date=run_date,
+                                              args=[RemoteCommand.VOLUME_INCREASE])
 
         # TODO: consider extract a helper method to construct a response e.g. flask_response(response_string)
         data = {service_constants.API_NAME_KEY: service_constants.API_NAME,
@@ -118,9 +125,3 @@ class Scheduler:
 
         return jsonify(data)
 
-
-if __name__ == '__main__':
-
-    # from command line, python scheduler.py will run schedule, won't run Flask service
-    scheduler = Scheduler()
-    scheduler.schedule_jobs()
