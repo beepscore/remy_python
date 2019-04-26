@@ -104,7 +104,7 @@ def volume_increase():
 @app.route("/api/v1/{}/volume-decrease-increase/".format(service_constants.API_NAME), methods=['POST'])
 def volume_decrease_increase():
     # apparently route decorator adds reference to "request"
-    post_data_dict = request.form
+    post_data_dict = request.get_json()
 
     # spell dictionary key duration-seconds with '-' similar to headers convention
     duration_seconds = post_data_dict.get('duration-seconds')
