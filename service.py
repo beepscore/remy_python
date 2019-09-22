@@ -49,7 +49,7 @@ def transmit_command(command):
 
     data = {service_constants.API_NAME_KEY: service_constants.API_NAME,
             service_constants.VERSION_KEY: service_constants.VERSION,
-            service_constants.RESPONSE_KEY: response}
+            service_constants.MESSAGE_KEY: response}
 
     return jsonify(data)
 
@@ -64,7 +64,7 @@ def api_status():
     if request.method == 'GET':
         data = {service_constants.API_NAME_KEY: service_constants.API_NAME,
                 service_constants.VERSION_KEY: service_constants.VERSION,
-                service_constants.RESPONSE_KEY: 'pong'}
+                service_constants.MESSAGE_KEY: 'pong'}
 
         return jsonify(data)
 

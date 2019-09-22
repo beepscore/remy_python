@@ -124,7 +124,7 @@ class Scheduler:
         # TODO: consider extract a helper method to construct a response e.g. flask_response(response_string)
         data = {service_constants.API_NAME_KEY: service_constants.API_NAME,
                 service_constants.VERSION_KEY: service_constants.VERSION,
-                service_constants.RESPONSE_KEY: 'volume-decrease-increase'}
+                service_constants.MESSAGE_KEY: 'volume-decrease-increase'}
 
         return jsonify(data)
 
