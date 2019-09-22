@@ -2,7 +2,7 @@ import unittest
 import quiet_times
 
 
-class MyTestCase(unittest.TestCase):
+class TestQuietTimes(unittest.TestCase):
 
     def test_get_quiet_times(self):
         times = quiet_times.get_quiet_times('../data/quiet_times.json')

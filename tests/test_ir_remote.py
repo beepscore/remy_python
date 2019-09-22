@@ -3,7 +3,7 @@ import ir_remote
 from remote_command import RemoteCommand
 
 
-class MyTestCase(unittest.TestCase):
+class TestIRRemote(unittest.TestCase):
 
     def test_irsend(self):
         self.assertEqual('irsend', ir_remote.IRSEND)
