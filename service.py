@@ -44,12 +44,12 @@ def transmit_command(command):
     transmit_command_ir(command)
 
     # f string requires Python >= 3.6, so don't use it yet.
-    # response = f'transmitted {command}'
-    response = 'transmitted {}'.format(command.value)
+    # message = f'transmitted {command}'
+    message = 'transmitted {}'.format(command.value)
 
     data = {service_constants.API_NAME_KEY: service_constants.API_NAME,
             service_constants.VERSION_KEY: service_constants.VERSION,
-            service_constants.MESSAGE_KEY: response}
+            service_constants.MESSAGE_KEY: message}
 
     return jsonify(data)
 
