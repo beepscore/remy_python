@@ -44,8 +44,8 @@ def transmit_command(command):
     transmit_command_ir(command)
 
     # f string requires Python >= 3.6, so don't use it yet.
-    # response = f'transmitted command {command}'
-    response = 'transmitted command {}'.format(command.value)
+    # response = f'transmitted {command}'
+    response = 'transmitted {}'.format(command.value)
 
     data = {service_constants.API_NAME_KEY: service_constants.API_NAME,
             service_constants.VERSION_KEY: service_constants.VERSION,

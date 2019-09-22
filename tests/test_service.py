@@ -25,7 +25,7 @@ class TestTvService(unittest.TestCase):
 
         json_expected = {'api_name': 'tv',
                          'version': '1.0',
-                         'message': 'transmitted command mute'}
+                         'message': 'transmitted mute'}
 
         # call method under test
         # http://flask.pocoo.org/docs/0.12/api/#response-objects
@@ -40,7 +40,7 @@ class TestTvService(unittest.TestCase):
 
         json_expected = {'api_name': 'tv',
                          'version': '1.0',
-                         'message': 'transmitted command power'}
+                         'message': 'transmitted power'}
 
         # call method under test
         # http://flask.pocoo.org/docs/0.12/api/#response-objects
@@ -55,7 +55,7 @@ class TestTvService(unittest.TestCase):
 
         json_expected = {'api_name': 'tv',
                          'version': '1.0',
-                         'message': 'transmitted command volume-decrease'}
+                         'message': 'transmitted volume-decrease'}
 
         # call method under test
         # http://flask.pocoo.org/docs/0.12/api/#response-objects
@@ -70,7 +70,7 @@ class TestTvService(unittest.TestCase):
 
         json_expected = {'api_name': 'tv',
                          'version': '1.0',
-                         'message': 'transmitted command volume-increase'}
+                         'message': 'transmitted volume-increase'}
 
         # call method under test
         # http://flask.pocoo.org/docs/0.12/api/#response-objects
