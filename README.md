@@ -26,10 +26,10 @@ Alternatively, can connect from another computer on local network via ssh.
 
     ssh -v pi@10.0.0.4
 
-### install LIRC
-Michael Traver's excellent "Raspberry Pi IR Remote Control" https://github.com/mtraver/rpi-ir-remote has helpful up to date suggestions for configuring current versions of LIRC (0.9.4) and Raspbian (Stretch) and warnings about outdated online info.
+----
 
-### ~ 2019
+### install LIRC ~ 2019
+Michael Traver's excellent "Raspberry Pi IR Remote Control" https://github.com/mtraver/rpi-ir-remote has helpful up to date suggestions for configuring current versions of LIRC (0.9.4) and Raspbian (Stretch) and warnings about outdated online info.
 
     sudo apt-get install lirc
 
@@ -38,45 +38,20 @@ Michael Traver's excellent "Raspberry Pi IR Remote Control" https://github.com/m
     Suggested packages:
       lirc-compat-remotes lirc-drv-irman lirc-doc lirc-x setserial ir-keytable
 
-#### 2021-06
-
-    sudo apt-get install lirc
-        The following additional packages will be installed:
-            <list differs from 2019>
-
-    sudo apt autoremove
-        Removing python-colorzero
-
 ### don't install package lirc-compat-remotes
 This package is outdated, contains remote definitions which were part of lirc up to 0.9.0.
 
 ### enable lirc-rpi
 
-#### ~ 2019
 In /boot/config.txt add this line
 
     dtoverlay=lirc-rpi,gpio_in_pin=18,gpio_out_pin=17
 
-#### 2021-06
-In /boot/config.txt says
-    # uncomment this to enable infrared communication.
-
-Uncomment 2 lines. Required sudo.
-
-    sudo vi config.txt
-
-    dtoverlay=gpio-ir,gpio_pin=17
-    dtoverlay=gpio-ir-tx,gpio_pin=18
-
 ### enable transmitting
 
-#### ~ 2019
 In /etc/lirc/lirc_options.conf
 - change driver to default
 - change device to /dev/lirc0
-
-#### 2021-06
-don't edit yet, wait to see if it is necessary
 
 ### don't add or edit hardware.conf
 LIRC 0.9.4 does not use hardware.conf
@@ -114,7 +89,7 @@ Use lirc command irsend
 The front facing camera on iPhone doesn't filter IR.
 It showed the raspberry pi is lighting the transmit infrared LED.
 However the remote configuration cambridge_cxa doesn't work with my Polk sound bar receiver.
-    
+
 #### Disable incorrect remote configuration files
 https://learn.adafruit.com/using-an-ir-remote-with-a-raspberry-pi-media-center/using-other-remotes
 To disable a configuration file change extension from .conf to e.g. .dist
@@ -128,27 +103,27 @@ Instead use an existing handheld remote transmitter to "teach" the Raspberry Pi 
 The Raspberry Pi IR Control Expansion Board has an infrared receiver.
 LIRC command irrecord records button press infrared signals. http://www.lirc.org/html/irrecord.html
 
-#### irrecord error need to stop lirc daemon
+##### irrecord error need to stop lirc daemon
 
     irrecord -d /dev/lirc0 ~/lircd.conf
 
     Using driver default on device /dev/lirc0
     Could not init hardware (lircd running ? --> close it, check permissions)
 
-##### view running processes
+###### view running processes
 
     htop
     ^C
 
-##### stop lirc daemon process by name
+###### stop lirc daemon process by name
 
     sudo killall -9 lircd
 
-##### list valid key names that are available to be assigned to a remote configuration file
+###### list valid key names that are available to be assigned to a remote configuration file
 
     irrecord --list-namespace
 
-##### irrecord -d didn't work with polk remote, it never got enough info to make a .conf file.
+###### irrecord -d didn't work with polk remote, it never got enough info to make a .conf file.
 In repo remy_python I added directory config to keep polk.lircd.conf in version control.
 
     cd remy_python/config
@@ -169,7 +144,7 @@ For LIRC to use configuration file, copied it to
     cd remy_python/config
     irrecord -f -u ./polk.lircd.conf
 
-Then copy updated file to 
+Then copy updated file to
 
     /etc/lirc/lircd.conf.d/polk.lircd.conf
 
@@ -183,6 +158,85 @@ Then copy updated file to
     0000000000000004 KEY_VOLUMEDOWN
     0000000000000005 KEY_UP
     0000000000000006 KEY_DOWN
+
+----
+
+### install LIRC ~ 2021-06
+Michael Traver's excellent "Raspberry Pi IR Remote Control" https://github.com/mtraver/rpi-ir-remote has helpful up to date suggestions for configuring current versions of LIRC (0.9.4) and Raspbian (Stretch) and warnings about outdated online info.
+
+    sudo apt-get install lirc
+        The following additional packages will be installed:
+            <list differs from 2019>
+
+    sudo apt autoremove
+        Removing python-colorzero
+
+### don't install package lirc-compat-remotes
+This package is outdated, contains remote definitions which were part of lirc up to 0.9.0.
+
+### enable lirc-rpi
+
+In /boot/config.txt says
+    # uncomment this to enable infrared communication.
+
+Uncomment 2 lines. Required sudo.
+
+    sudo vi config.txt
+
+    dtoverlay=gpio-ir,gpio_pin=17
+    dtoverlay=gpio-ir-tx,gpio_pin=18
+
+### enable transmitting
+
+don't edit /etc/lirc/lirc_options.conf yet, wait to see if it is necessary
+
+### don't add or edit hardware.conf
+LIRC 0.9.4 does not use hardware.conf
+
+### Add remote control config files
+lirc looks in a configuration directory for files ending in .conf
+
+    /etc/lirc/lircd.conf.d
+
+https://sourceforge.net/projects/lirc-remotes/ has config files for many remotes.
+You can try any of these to see if they work with your device.
+
+Don't add cxa_cxc_cxn.lircd.conf
+I think it isn't needed
+
+#### Don't disable incorrect remote configuration files
+https://learn.adafruit.com/using-an-ir-remote-with-a-raspberry-pi-media-center/using-other-remotes
+To disable a configuration file change extension from .conf to e.g. .dist
+
+    cd /etc/lirc/lircd.conf.d
+    sudo mv devinput.lircd.conf devinput.lircd.dist
+
+Don't disable.
+Wait to see if it is necessary.
+
+Copy polk.lircd.conf
+
+    cd /etc/lirc/lircd.conf.d
+    sudo cp ~/beepscore/remy_python/config/polk.lircd.conf .
+
+### list polk configuration defined keys
+
+    irsend list polk ""
+
+FIXME: terminal output
+
+    unknown remote: "polk"
+
+terminal output should be:
+
+    0000000000000001 KEY_MUTE
+    0000000000000002 KEY_POWER
+    0000000000000003 KEY_VOLUMEUP
+    0000000000000004 KEY_VOLUMEDOWN
+    0000000000000005 KEY_UP
+    0000000000000006 KEY_DOWN
+
+---
 
 ## To run Flask web service
 
