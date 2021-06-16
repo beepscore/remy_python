@@ -25,19 +25,31 @@ Can attach keyboard and monitor to pi.
 Alternatively, can connect from another computer on local network via ssh.
 
     ssh -v pi@10.0.0.4
-    
+
 ### install LIRC
 Michael Traver's excellent "Raspberry Pi IR Remote Control" https://github.com/mtraver/rpi-ir-remote has helpful up to date suggestions for configuring current versions of LIRC (0.9.4) and Raspbian (Stretch) and warnings about outdated online info.
 
+### ~ 2019
+
     sudo apt-get install lirc
+
     The following additional packages will be installed:
       libftdi102 liblirc0 python3-yaml
     Suggested packages:
       lirc-compat-remotes lirc-drv-irman lirc-doc lirc-x setserial ir-keytable
 
+#### 2021-06
+
+    sudo apt-get install lirc
+        The following additional packages will be installed:
+            <list differs from 2019>
+
+    sudo apt autoremove
+        Removing python-colorzero
+
 ### don't install package lirc-compat-remotes
 This package is outdated, contains remote definitions which were part of lirc up to 0.9.0.
-    
+
 ### enable lirc-rpi
 Add the following content to /boot/config.txt
 
@@ -76,7 +88,7 @@ Use lirc command irsend
     0000000000001433 KEY_MUTE_OFF
     0000000000001410 KEY_VOLUMEUP
     0000000000001411 KEY_VOLUMEDOWN
-    
+
 #### send a key
 
     irsend SEND_ONCE cambridge_cxa KEY_VOLUMEDOWN
@@ -91,7 +103,7 @@ To disable a configuration file change extension from .conf to e.g. .dist
 
     cd /etc/lirc/lircd.conf.d
     sudo mv devinput.lircd.conf devinput.lircd.dist
-    
+
 ### Use infrared receiver to generate a new configuration file.
 lirc-remotes has lots of files, but none named polk. Could try existing ones but this could be time consuming.
 Instead use an existing handheld remote transmitter to "teach" the Raspberry Pi how to act like that remote.
@@ -117,7 +129,7 @@ LIRC command irrecord records button press infrared signals. http://www.lirc.org
 ##### list valid key names that are available to be assigned to a remote configuration file
 
     irrecord --list-namespace
-    
+
 ##### irrecord -d didn't work with polk remote, it never got enough info to make a .conf file.
 In repo remy_python I added directory config to keep polk.lircd.conf in version control.
 
@@ -159,7 +171,7 @@ Then copy updated file to
 ### connect to raspberry pi
 
     ssh -v pi@10.0.0.4
-    
+
 cd to project directory
 
     cd ~/beepscore/remy_python
@@ -181,7 +193,7 @@ Now clients on local network can see the remote control service.
 #### GET
 
     http://10.0.0.4:5000/api/v1/tv/ping/
-    
+
 #### POST
 Send a remote control command.
 
@@ -197,7 +209,7 @@ GET requests can be made via a browser such as Firefox or mobile Safari.
 POST requests can be made via clients such as terminal curl or POSTMAN or iOS Remy.app
 
     curl --request POST http://10.0.0.4:5000/api/v1/tv/volume-decrease/
-    
+
 ### server log
 pi terminal shows client's ip address and request info
 
@@ -212,13 +224,13 @@ However I couldn't find conda apscheduler for raspberry pi. So install via pip.
 
     source activate remy_python
     pip install apscheduler
-    
+
 ### run
 To run server and scheduler
 
     source activate remy_python
     python service.py
-     
+
 To run scheduler but not server
 
     source activate remy_python
