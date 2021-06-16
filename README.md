@@ -51,14 +51,32 @@ Michael Traver's excellent "Raspberry Pi IR Remote Control" https://github.com/m
 This package is outdated, contains remote definitions which were part of lirc up to 0.9.0.
 
 ### enable lirc-rpi
-Add the following content to /boot/config.txt
+
+#### ~ 2019
+In /boot/config.txt add this line
 
     dtoverlay=lirc-rpi,gpio_in_pin=18,gpio_out_pin=17
 
-### enable transmitting 
+#### 2021-06
+In /boot/config.txt says
+    # uncomment this to enable infrared communication.
+
+Uncomment 2 lines. Required sudo.
+
+    sudo vi config.txt
+
+    dtoverlay=gpio-ir,gpio_pin=17
+    dtoverlay=gpio-ir-tx,gpio_pin=18
+
+### enable transmitting
+
+#### ~ 2019
 In /etc/lirc/lirc_options.conf
 - change driver to default
 - change device to /dev/lirc0
+
+#### 2021-06
+don't edit yet, wait to see if it is necessary
 
 ### don't add or edit hardware.conf
 LIRC 0.9.4 does not use hardware.conf
