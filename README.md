@@ -194,7 +194,6 @@ In /boot/config.txt says
 
 Uncomment 2 lines. Required sudo.
 NOTE: Swap 17 and 18 to match my ICStation board.
-Now TV sound bar responds to pi.
 
     sudo vi config.txt
 
@@ -208,9 +207,17 @@ At first I didn't edit /etc/lirc/lirc_options.conf yet
 LIRC 0.9.4 does not use hardware.conf
 
 ### Add remote control config files
-lirc looks in a configuration directory for files ending in .conf
+Background: lirc looks in a configuration directory for files ending in .conf
 
     /etc/lirc/lircd.conf.d
+
+#### Don't disable /etc/lirc/lircd.conf.d/devinput.lircd.conf
+This is not necessary to use polk.lircd.conf
+https://learn.adafruit.com/using-an-ir-remote-with-a-raspberry-pi-media-center/using-other-remotes
+To disable a configuration file change extension from .conf to e.g. .dist
+
+    cd /etc/lirc/lircd.conf.d
+    sudo mv devinput.lircd.conf devinput.lircd.dist
 
 https://sourceforge.net/projects/lirc-remotes/ has config files for many remotes.
 You can try any of these to see if they work with your device.
@@ -218,17 +225,8 @@ You can try any of these to see if they work with your device.
 Don't add cxa_cxc_cxn.lircd.conf
 It isn't needed.
 
-#### At first I didn't disable incorrect remote configuration files
-https://learn.adafruit.com/using-an-ir-remote-with-a-raspberry-pi-media-center/using-other-remotes
-To disable a configuration file change extension from .conf to e.g. .dist
-
-    cd /etc/lirc/lircd.conf.d
-    sudo mv devinput.lircd.conf devinput.lircd.dist
-
-Don't disable.
-Wait to see if it is necessary.
-
-#### Copy polk.lircd.conf
+#### Add polk.lircd.conf
+Copy from repo remy_python/config to /etc/lirc/lircd.conf.d
 
     cd /etc/lirc/lircd.conf.d
     sudo cp ~/beepscore/remy_python/config/polk.lircd.conf .
@@ -301,20 +299,6 @@ I rebooted raspberry pi.
 
 iPhone 12 front facing camera didn't show LED blink.
 TV sound bar did not respond.
-
-#### Disable incorrect remote configuration files
-https://learn.adafruit.com/using-an-ir-remote-with-a-raspberry-pi-media-center/using-other-remotes
-To disable a configuration file change extension from .conf to e.g. .dist
-
-    cd /etc/lirc/lircd.conf.d
-    sudo mv devinput.lircd.conf devinput.lircd.dist
-
-retry
-
-    irsend SEND_ONCE polk KEY_VOLUMEUP
-
-iPhone 12 front facing camera shows LED blink.
-TV sound bar responds to IR command from raspberry pi.
 
 ---
 
