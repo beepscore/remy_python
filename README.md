@@ -11,7 +11,12 @@ The Python app has three main parts:
 
 # Results
 
+## TV Sound Bar
+Polk audio
+
 ## Infrared transmitter
+IR LED is not visible by eye.
+iPhone 12 front facing camera doesn't filter IR. It will show IR LED blink.
 
 ### Install hardware
 Raspberry Pi IR Control Expansion Board. This uses gpio pins 17 out (IR LED), pin 18 in (IR receiver).
@@ -50,7 +55,13 @@ In /boot/config.txt add this line
 ### enable transmitting
 
 In /etc/lirc/lirc_options.conf
-- change driver to default
+change
+
+    driver=devinput
+to
+
+    driver=default
+
 - change device to /dev/lirc0
 
 ### don't add or edit hardware.conf
@@ -86,8 +97,7 @@ Use lirc command irsend
 
     irsend SEND_ONCE cambridge_cxa KEY_VOLUMEDOWN
 
-The front facing camera on iPhone doesn't filter IR.
-It showed the raspberry pi is lighting the transmit infrared LED.
+The front facing camera on iPhone showed the raspberry pi is lighting the transmit infrared LED.
 However the remote configuration cambridge_cxa doesn't work with my Polk sound bar receiver.
 
 #### Disable incorrect remote configuration files
@@ -162,6 +172,9 @@ Then copy updated file to
 ----
 
 ### install LIRC ~ 2021-06
+I erased an 8 Gb SD card and installed latest version of Raspberry Pi OS.
+Then put in a Raspberry Pi 3.
+
 Michael Traver's excellent "Raspberry Pi IR Remote Control" https://github.com/mtraver/rpi-ir-remote has helpful up to date suggestions for configuring current versions of LIRC (0.9.4) and Raspbian (Stretch) and warnings about outdated online info.
 
     sudo apt-get install lirc
@@ -180,15 +193,16 @@ In /boot/config.txt says
     # uncomment this to enable infrared communication.
 
 Uncomment 2 lines. Required sudo.
+NOTE: Swap 17 and 18 to match my ICStation board.
+Now TV sound bar responds to pi.
 
     sudo vi config.txt
 
-    dtoverlay=gpio-ir,gpio_pin=17
-    dtoverlay=gpio-ir-tx,gpio_pin=18
+    dtoverlay=gpio-ir,gpio_pin=18
+    dtoverlay=gpio-ir-tx,gpio_pin=17
 
 ### enable transmitting
-
-don't edit /etc/lirc/lirc_options.conf yet, wait to see if it is necessary
+At first I didn't edit /etc/lirc/lirc_options.conf yet
 
 ### don't add or edit hardware.conf
 LIRC 0.9.4 does not use hardware.conf
@@ -202,9 +216,9 @@ https://sourceforge.net/projects/lirc-remotes/ has config files for many remotes
 You can try any of these to see if they work with your device.
 
 Don't add cxa_cxc_cxn.lircd.conf
-I think it isn't needed
+It isn't needed.
 
-#### Don't disable incorrect remote configuration files
+#### At first I didn't disable incorrect remote configuration files
 https://learn.adafruit.com/using-an-ir-remote-with-a-raspberry-pi-media-center/using-other-remotes
 To disable a configuration file change extension from .conf to e.g. .dist
 
@@ -214,7 +228,7 @@ To disable a configuration file change extension from .conf to e.g. .dist
 Don't disable.
 Wait to see if it is necessary.
 
-Copy polk.lircd.conf
+#### Copy polk.lircd.conf
 
     cd /etc/lirc/lircd.conf.d
     sudo cp ~/beepscore/remy_python/config/polk.lircd.conf .
@@ -223,11 +237,15 @@ Copy polk.lircd.conf
 
     irsend list polk ""
 
-FIXME: terminal output
+terminal output
 
     unknown remote: "polk"
 
-terminal output should be:
+I rebooted pi, now irsend list works.
+
+    irsend list polk ""
+
+terminal output
 
     0000000000000001 KEY_MUTE
     0000000000000002 KEY_POWER
@@ -235,6 +253,68 @@ terminal output should be:
     0000000000000004 KEY_VOLUMEDOWN
     0000000000000005 KEY_UP
     0000000000000006 KEY_DOWN
+
+#### send a key
+
+    irsend SEND_ONCE polk KEY_VOLUMEDOWN
+
+    "hardware does not support sending.
+     Error running command: Input/output error"
+
+### enable transmitting
+At first I didn't edit /etc/lirc/lirc_options.conf
+However I think this is necessary to fix "hardware does not support sending".
+Reference https://raspberrypi.stackexchange "LIRC won't transmit (irsend: hardware does not support sending")
+
+Make a backup copy
+
+    cd /etc/lirc
+    sudo cp lirc_options.conf lirc_options.conf.bak
+
+In /etc/lirc/lirc_options.conf
+change
+
+    driver=devinput
+to
+
+    driver=default
+
+I rebooted pi. Now hardware message doesn't appear.
+However iPhone 12 front facing camera doesn't show LED blink.
+TV sound bar did not respond.
+
+change
+
+    device=auto
+to
+
+    device=/dev/lirc0
+
+retry
+
+    irsend SEND_ONCE polk KEY_VOLUMEUP
+
+iPhone 12 front facing camera didn't show LED blink.
+TV sound bar did not respond.
+
+I rebooted raspberry pi.
+
+iPhone 12 front facing camera didn't show LED blink.
+TV sound bar did not respond.
+
+#### Disable incorrect remote configuration files
+https://learn.adafruit.com/using-an-ir-remote-with-a-raspberry-pi-media-center/using-other-remotes
+To disable a configuration file change extension from .conf to e.g. .dist
+
+    cd /etc/lirc/lircd.conf.d
+    sudo mv devinput.lircd.conf devinput.lircd.dist
+
+retry
+
+    irsend SEND_ONCE polk KEY_VOLUMEUP
+
+iPhone 12 front facing camera shows LED blink.
+TV sound bar responds to IR command from raspberry pi.
 
 ---
 
@@ -391,6 +471,9 @@ https://www.amazon.com/Raspberry-Controller-Transmitter-Transceiver-Geekworm/dp/
 
 ### WINGONEER 38KHz IR Infrared Remote Control Transceiver Shield for Raspberry Pi 2 3 Module B
 https://www.amazon.com/WINGONEER-Infrared-Control-Transceiver-Raspberry/dp/B072QWXLK2
+
+### How to send and receive IR signals with a raspberry pi
+https://www.digikey.com/en/maker/blogs/2021/how-to-send-and-receive-ir-signals-with-a-raspberry-pi
 
 ### Raspberry Pi Zero Universal Remote 2018
 https://www.instructables.com/id/Raspberry-Pi-Zero-Universal-Remote/
