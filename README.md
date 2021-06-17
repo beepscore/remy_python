@@ -75,6 +75,10 @@ lirc looks in a configuration directory for files ending in .conf
 https://sourceforge.net/projects/lirc-remotes/ has config files for many remotes.
 You can try any of these to see if they work with your device.
 
+Created a custom configuration file for Polk sound bar.
+Put in this repo remy_python/config for version control, and copied to /etc/lirc/lircd.conf.d
+For more info see Appendix - Create polk.lircd.conf
+
 ----
 
 ### install LIRC ~ 2021-06
@@ -133,6 +137,7 @@ It isn't needed.
 
 #### Add polk.lircd.conf
 Copy from repo remy_python/config to /etc/lirc/lircd.conf.d
+For more info see Appendix - Create polk.lircd.conf
 
     cd /etc/lirc/lircd.conf.d
     sudo cp ~/beepscore/remy_python/config/polk.lircd.conf .
@@ -197,14 +202,6 @@ to
 retry
 
     irsend SEND_ONCE polk KEY_VOLUMEUP
-
-iPhone 12 front facing camera didn't show LED blink.
-TV sound bar did not respond.
-
-I rebooted raspberry pi.
-
-iPhone 12 front facing camera didn't show LED blink.
-TV sound bar did not respond.
 
 ---
 
