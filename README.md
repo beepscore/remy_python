@@ -186,6 +186,9 @@ to
 
     driver=default
 
+The right hand side may be delimited by " i.e. driver="default"
+String delimiter is not necessary (at least for filenames with no spaces) so I didn't do it.
+
 I rebooted pi. Now hardware message doesn't appear.
 However iPhone 12 front facing camera doesn't show LED blink.
 TV sound bar did not respond.
