@@ -179,30 +179,23 @@ Make a backup copy
     sudo cp lirc_options.conf lirc_options.conf.bak
 
 In /etc/lirc/lirc_options.conf
-change
 
-    driver=devinput
+#### change driver
+
+    driver = devinput
 to
 
-    driver=default
+    driver = default
 
-The right hand side may be delimited by " i.e. driver="default"
+The right hand side may be delimited by " i.e. driver = "default"
 String delimiter is not necessary (at least for filenames with no spaces) so I didn't do it.
 
 I rebooted pi. Now hardware message doesn't appear.
 However iPhone 12 front facing camera doesn't show LED blink.
 TV sound bar did not respond.
 
-change
-
-    device=auto
-to
-
-    device=/dev/lirc0
-
-retry
-
-    irsend SEND_ONCE polk KEY_VOLUMEUP
+#### Keep device = auto
+device=/dev/lirc0 works but isn't necessary.
 
 ---
 
