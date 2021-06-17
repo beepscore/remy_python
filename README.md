@@ -75,100 +75,6 @@ lirc looks in a configuration directory for files ending in .conf
 https://sourceforge.net/projects/lirc-remotes/ has config files for many remotes.
 You can try any of these to see if they work with your device.
 
-I added cxa_cxc_cxn.lircd.conf
-
-    pi@raspberrypi:/etc/lirc/lircd.conf.d $ sudo cp ~/beepscore/rpi-ir-remote/config/lirc/cxa_cxc_cxn.lircd.conf .
-
-### list cambridge_cxa configuration defined keys
-Use lirc command irsend
-
-    irsend list cambridge_cxa ""
-
-    000000000000140c KEY_POWER
-    000000000000140e KEY_POWER_ON
-    000000000000140f KEY_POWER_OFF
-    000000000000140d KEY_MUTE
-    0000000000001432 KEY_MUTE_ON
-    0000000000001433 KEY_MUTE_OFF
-    0000000000001410 KEY_VOLUMEUP
-    0000000000001411 KEY_VOLUMEDOWN
-
-#### send a key
-
-    irsend SEND_ONCE cambridge_cxa KEY_VOLUMEDOWN
-
-The front facing camera on iPhone showed the raspberry pi is lighting the transmit infrared LED.
-However the remote configuration cambridge_cxa doesn't work with my Polk sound bar receiver.
-
-#### Disable incorrect remote configuration files
-https://learn.adafruit.com/using-an-ir-remote-with-a-raspberry-pi-media-center/using-other-remotes
-To disable a configuration file change extension from .conf to e.g. .dist
-
-    cd /etc/lirc/lircd.conf.d
-    sudo mv devinput.lircd.conf devinput.lircd.dist
-
-### Use infrared receiver to generate a new configuration file.
-lirc-remotes has lots of files, but none named polk. Could try existing ones but this could be time consuming.
-Instead use an existing handheld remote transmitter to "teach" the Raspberry Pi how to act like that remote.
-The Raspberry Pi IR Control Expansion Board has an infrared receiver.
-LIRC command irrecord records button press infrared signals. http://www.lirc.org/html/irrecord.html
-
-##### irrecord error need to stop lirc daemon
-
-    irrecord -d /dev/lirc0 ~/lircd.conf
-
-    Using driver default on device /dev/lirc0
-    Could not init hardware (lircd running ? --> close it, check permissions)
-
-###### view running processes
-
-    htop
-    ^C
-
-###### stop lirc daemon process by name
-
-    sudo killall -9 lircd
-
-###### list valid key names that are available to be assigned to a remote configuration file
-
-    irrecord --list-namespace
-
-###### irrecord -d didn't work with polk remote, it never got enough info to make a .conf file.
-In repo remy_python I added directory config to keep polk.lircd.conf in version control.
-
-    cd remy_python/config
-    irrecord -d /dev/lirc0 ./polk.lircd.conf
-
-##### fix recording failing using option -f --force raw mode
-
-    irrecord -f -d /dev/lirc0 ~/polk.lircd.conf
-
-Enter valid key names e.g. KEY_VOLUMEDOWN
-
-For LIRC to use configuration file, copied it to
-
-    /etc/lirc/lircd.conf.d/polk.lircd.conf
-
-### add more keys using option -u --update
-
-    cd remy_python/config
-    irrecord -f -u ./polk.lircd.conf
-
-Then copy updated file to
-
-    /etc/lirc/lircd.conf.d/polk.lircd.conf
-
-### list polk configuration defined keys
-
-    irsend list polk ""
-
-    0000000000000001 KEY_MUTE
-    0000000000000002 KEY_POWER
-    0000000000000003 KEY_VOLUMEUP
-    0000000000000004 KEY_VOLUMEDOWN
-    0000000000000005 KEY_UP
-    0000000000000006 KEY_DOWN
-
 ----
 
 ### install LIRC ~ 2021-06
@@ -383,6 +289,103 @@ Not sure how to run tests on pi yet.
     python -m unittest discover
 
 throws RuntimeError: working outside of request context
+
+# Appendix - Create polk.lircd.conf
+Create a custom config file for Polk sound bar.
+
+First I tried file cxa_cxc_cxn.lircd.conf
+
+    pi@raspberrypi:/etc/lirc/lircd.conf.d $ sudo cp ~/beepscore/rpi-ir-remote/config/lirc/cxa_cxc_cxn.lircd.conf .
+
+### list cambridge_cxa configuration defined keys
+Use lirc command irsend
+
+    irsend list cambridge_cxa ""
+
+    000000000000140c KEY_POWER
+    000000000000140e KEY_POWER_ON
+    000000000000140f KEY_POWER_OFF
+    000000000000140d KEY_MUTE
+    0000000000001432 KEY_MUTE_ON
+    0000000000001433 KEY_MUTE_OFF
+    0000000000001410 KEY_VOLUMEUP
+    0000000000001411 KEY_VOLUMEDOWN
+
+#### send a key
+
+    irsend SEND_ONCE cambridge_cxa KEY_VOLUMEDOWN
+
+The front facing camera on iPhone showed the raspberry pi is lighting the transmit infrared LED.
+However the remote configuration cambridge_cxa doesn't work with my Polk sound bar receiver.
+
+#### Disable incorrect remote configuration files
+https://learn.adafruit.com/using-an-ir-remote-with-a-raspberry-pi-media-center/using-other-remotes
+To disable a configuration file change extension from .conf to e.g. .dist
+
+    cd /etc/lirc/lircd.conf.d
+    sudo mv devinput.lircd.conf devinput.lircd.dist
+
+### Use infrared receiver to generate a new configuration file.
+lirc-remotes has lots of files, but none named polk. Could try existing ones but this could be time consuming.
+Instead use an existing handheld remote transmitter to "teach" the Raspberry Pi how to act like that remote.
+The Raspberry Pi IR Control Expansion Board has an infrared receiver.
+LIRC command irrecord records button press infrared signals. http://www.lirc.org/html/irrecord.html
+
+##### irrecord error need to stop lirc daemon
+
+    irrecord -d /dev/lirc0 ~/lircd.conf
+
+    Using driver default on device /dev/lirc0
+    Could not init hardware (lircd running ? --> close it, check permissions)
+
+###### view running processes
+
+    htop
+    ^C
+
+###### stop lirc daemon process by name
+
+    sudo killall -9 lircd
+
+###### list valid key names that are available to be assigned to a remote configuration file
+
+    irrecord --list-namespace
+
+###### irrecord -d didn't work with polk remote, it never got enough info to make a .conf file.
+In repo remy_python I added directory config to keep polk.lircd.conf in version control.
+
+    cd remy_python/config
+    irrecord -d /dev/lirc0 ./polk.lircd.conf
+
+##### fix recording failing using option -f --force raw mode
+
+    irrecord -f -d /dev/lirc0 ~/polk.lircd.conf
+
+Enter valid key names e.g. KEY_VOLUMEDOWN
+
+For LIRC to use configuration file, copied it to
+
+    /etc/lirc/lircd.conf.d/polk.lircd.conf
+
+### add more keys using option -u --update
+
+    cd remy_python/config
+    irrecord -f -u ./polk.lircd.conf
+
+Then copy updated file to
+
+    /etc/lirc/lircd.conf.d/polk.lircd.conf
+
+### list polk configuration defined keys
+
+    irsend list polk ""
+
+    0000000000000001 KEY_MUTE
+    0000000000000002 KEY_POWER
+    0000000000000003 KEY_VOLUMEUP
+    0000000000000004 KEY_VOLUMEDOWN
+    0000000000000005 KEY_UP
+    0000000000000006 KEY_DOWN
 
 # References
 
