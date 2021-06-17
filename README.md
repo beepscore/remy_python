@@ -83,7 +83,7 @@ For more info see Appendix - Create polk.lircd.conf
 
 ### install LIRC ~ 2021-06
 I erased an 8 Gb SD card and installed latest version of Raspberry Pi OS.
-Then put in a Raspberry Pi 3.
+Then put it in a Raspberry Pi 3.
 
 Michael Traver's excellent "Raspberry Pi IR Remote Control" https://github.com/mtraver/rpi-ir-remote has helpful up to date suggestions for configuring current versions of LIRC (0.9.4) and Raspbian (Stretch) and warnings about outdated online info.
 
@@ -103,15 +103,14 @@ In /boot/config.txt says
     # uncomment this to enable infrared communication.
 
 Uncomment 2 lines. Required sudo.
-NOTE: Swap 17 and 18 to match my ICStation board.
+
+NOTE: Swap pins 17 and 18 to match my ICStation board.
+Transmit tx should be pin 18.
 
     sudo vi config.txt
 
     dtoverlay=gpio-ir,gpio_pin=18
     dtoverlay=gpio-ir-tx,gpio_pin=17
-
-### enable transmitting
-At first I didn't edit /etc/lirc/lirc_options.conf yet
 
 ### don't add or edit hardware.conf
 LIRC 0.9.4 does not use hardware.conf
@@ -171,8 +170,7 @@ terminal output
      Error running command: Input/output error"
 
 ### enable transmitting
-At first I didn't edit /etc/lirc/lirc_options.conf
-However I think this is necessary to fix "hardware does not support sending".
+This is necessary to fix "hardware does not support sending".
 Reference https://raspberrypi.stackexchange "LIRC won't transmit (irsend: hardware does not support sending")
 
 Make a backup copy
