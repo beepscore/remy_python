@@ -234,6 +234,13 @@ start Flask web server
 
 Now clients on local network can see the remote control service.
 
+Can add a bash script e.g. start_remy_python.sh
+
+    cd ~/beepscore/remy_python
+    # activate python virtual environment
+    source ./venv/bin/activate
+    python3 service.py
+
 ### endpoints
 
 #### GET
