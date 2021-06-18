@@ -207,6 +207,10 @@ Then in terminal
     cd remy_python
     python3 -m venv ./venv
 
+    source ./venv/bin/activate
+
+    pip3 install apscheduler
+    pip3 install flask
 
 ## To run Flask web service
 
