@@ -33,7 +33,7 @@ Alternatively, can connect from another computer on local network via ssh.
 
 ----
 
-### install LIRC ~ 2019
+### install os dependency LIRC ~ 2019
 Michael Traver's excellent "Raspberry Pi IR Remote Control" https://github.com/mtraver/rpi-ir-remote has helpful up to date suggestions for configuring current versions of LIRC (0.9.4) and Raspbian (Stretch) and warnings about outdated online info.
 
     sudo apt-get install lirc
@@ -81,7 +81,7 @@ For more info see Appendix - Create polk.lircd.conf
 
 ----
 
-### install LIRC ~ 2021-06
+### install os dependency LIRC ~ 2021-06
 I erased an 8 Gb SD card and installed latest version of Raspberry Pi OS.
 Then put it in a Raspberry Pi 3.
 
@@ -196,6 +196,17 @@ I rebooted pi. Now hardware message doesn't appear.
 device=/dev/lirc0 works but isn't necessary.
 
 ---
+
+## install python dependencies
+If using venv, can ignore via .gitignore
+
+    venv/*
+
+Then in terminal
+
+    cd remy_python
+    python3 -m venv ./venv
+
 
 ## To run Flask web service
 
