@@ -15,15 +15,19 @@ The Python app has three main parts:
 Polk audio
 
 ## Infrared transmitter
-IR LED is not visible by eye.
+LED IR light is invisible to human eye.
 iPhone 12 front facing camera doesn't filter IR. It will show IR LED blink.
 
-### Install hardware
+## Install hardware
 Raspberry Pi IR Control Expansion Board. This uses gpio pins 17 out (IR LED), pin 18 in (IR receiver).
 http://www.raspberrypiwiki.com/index.php/Raspberry_Pi_IR_Control_Expansion_Board
 
 I bought Icstation 38KHz IR Infrared Remote Control Transceiver Shield for Raspberry Pi 2 3 Module B B+
 https://www.amazon.com/IR-Remote-Control-Transceiver-Raspberry/dp/B0713SK7RJ/ref=pd_cp_147_1?pd_rd_w=nydwe&pf_rd_p=ef4dc990-a9ca-4945-ae0b-f8d549198ed6&pf_rd_r=NPTQR2NR66SZXGEC1CFF&pd_rd_r=dc222ec9-1d1f-11e9-82b3-7117715d74e2&pd_rd_wg=OnVSD&pd_rd_i=B0713SK7RJ&psc=1&refRID=NPTQR2NR66SZXGEC1CFF
+
+## Install Raspberry Pi OS
+I erased an 8 Gb SD card and installed latest version of Raspberry Pi OS.
+Then put it in a Raspberry Pi 3.
 
 ### connect to raspberry pi
 Can attach keyboard and monitor to pi.
@@ -31,60 +35,7 @@ Alternatively, can connect from another computer on local network via ssh.
 
     ssh -v pi@10.0.0.4
 
-----
-
-### install os dependency LIRC ~ 2019
-Michael Traver's excellent "Raspberry Pi IR Remote Control" https://github.com/mtraver/rpi-ir-remote has helpful up to date suggestions for configuring current versions of LIRC (0.9.4) and Raspbian (Stretch) and warnings about outdated online info.
-
-    sudo apt-get install lirc
-
-    The following additional packages will be installed:
-      libftdi102 liblirc0 python3-yaml
-    Suggested packages:
-      lirc-compat-remotes lirc-drv-irman lirc-doc lirc-x setserial ir-keytable
-
-### don't install package lirc-compat-remotes
-This package is outdated, contains remote definitions which were part of lirc up to 0.9.0.
-
-### enable lirc-rpi
-
-In /boot/config.txt add this line
-
-    dtoverlay=lirc-rpi,gpio_in_pin=18,gpio_out_pin=17
-
-### enable transmitting
-
-In /etc/lirc/lirc_options.conf
-change
-
-    driver=devinput
-to
-
-    driver=default
-
-- change device to /dev/lirc0
-
-### don't add or edit hardware.conf
-LIRC 0.9.4 does not use hardware.conf
-
-### Add remote control config files
-lirc looks in a configuration directory for files ending in .conf
-
-    /etc/lirc/lircd.conf.d
-
-https://sourceforge.net/projects/lirc-remotes/ has config files for many remotes.
-You can try any of these to see if they work with your device.
-
-Created a custom configuration file for Polk sound bar.
-Put in this repo remy_python/config for version control, and copied to /etc/lirc/lircd.conf.d
-For more info see Appendix - Create polk.lircd.conf
-
-----
-
-### install os dependency LIRC ~ 2021-06
-I erased an 8 Gb SD card and installed latest version of Raspberry Pi OS.
-Then put it in a Raspberry Pi 3.
-
+### install dependency LIRC
 Michael Traver's excellent "Raspberry Pi IR Remote Control" https://github.com/mtraver/rpi-ir-remote has helpful up to date suggestions for configuring current versions of LIRC (0.9.4) and Raspbian (Stretch) and warnings about outdated online info.
 
     sudo apt-get install lirc
@@ -113,7 +64,7 @@ Transmit tx should be pin 18.
     dtoverlay=gpio-ir-tx,gpio_pin=17
 
 ### don't add or edit hardware.conf
-LIRC 0.9.4 does not use hardware.conf
+LIRC >= 0.9.4 does not use hardware.conf
 
 ### Add remote control config files
 Background: lirc looks in a configuration directory for files ending in .conf
@@ -131,10 +82,14 @@ To disable a configuration file change extension from .conf to e.g. .dist
 https://sourceforge.net/projects/lirc-remotes/ has config files for many remotes.
 You can try any of these to see if they work with your device.
 
-Don't add cxa_cxc_cxn.lircd.conf
-It isn't needed.
+I tried cxa_cxc_cxn.lircd.conf but it didn't work with Polk sound bar.
+For more info see Appendix - cxa_cxc_cxn.lircd.conf
 
-#### Add polk.lircd.conf
+#### Create a custom configuration file for Polk sound bar.
+Put in this repo remy_python/config for version control, and copied to /etc/lirc/lircd.conf.d
+For more info see Appendix - Create polk.lircd.conf
+
+##### Add polk.lircd.conf
 Copy from repo remy_python/config to /etc/lirc/lircd.conf.d
 For more info see Appendix - Create polk.lircd.conf
 
@@ -198,7 +153,11 @@ device=/dev/lirc0 works but isn't necessary.
 ---
 
 ## install python dependencies
-If using venv, can ignore via .gitignore
+
+### venv virtual environment
+This project doesn't have many dependencies, and venv is an easy way to manage them.
+Anaconda / conda / miniconda may work better for projects with more dependencies.
+If using venv, in .gitignore add a line to ignore the directory:
 
     venv/*
 
@@ -207,6 +166,7 @@ Then in terminal
     cd remy_python
     python3 -m venv ./venv
 
+#### activate
     source ./venv/bin/activate
 
     pip3 install apscheduler
@@ -222,7 +182,12 @@ cd to project directory
 
     cd ~/beepscore/remy_python
 
-If using conda (e.g. via miniconda), activate environment
+#### activate environment
+If using venv
+
+    source ./venv/bin/activate
+
+If using conda (e.g. via miniconda)
 
     source activate remy_python
 
@@ -234,7 +199,12 @@ start Flask web server
 
 Now clients on local network can see the remote control service.
 
-Can add a bash script e.g. start_remy_python.sh
+## Can add a bash script e.g. start_remy_python.sh
+give user permission to execute script
+
+    chmod u+x start_remy_python.sh
+
+Example script
 
     cd ~/beepscore/remy_python
     # activate python virtual environment
@@ -301,10 +271,8 @@ Not sure how to run tests on pi yet.
 
 throws RuntimeError: working outside of request context
 
-# Appendix - Create polk.lircd.conf
-Create a custom config file for Polk sound bar.
-
-First I tried file cxa_cxc_cxn.lircd.conf
+# Appendix - cxa_cxc_cxn.lircd.conf
+First I tried lirc configuration file cxa_cxc_cxn.lircd.conf
 
     pi@raspberrypi:/etc/lirc/lircd.conf.d $ sudo cp ~/beepscore/rpi-ir-remote/config/lirc/cxa_cxc_cxn.lircd.conf .
 
@@ -328,6 +296,9 @@ Use lirc command irsend
 
 The front facing camera on iPhone showed the raspberry pi is lighting the transmit infrared LED.
 However the remote configuration cambridge_cxa doesn't work with my Polk sound bar receiver.
+
+# Appendix - Create polk.lircd.conf
+Create a custom lirc config file for Polk sound bar.
 
 #### Disable incorrect remote configuration files
 https://learn.adafruit.com/using-an-ir-remote-with-a-raspberry-pi-media-center/using-other-remotes
