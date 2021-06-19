@@ -389,6 +389,10 @@ https://github.com/beepscore/Remy
 
 ## Similar remote control projects
 
+### Turning Raspberry PI into Remote Controller
+Justin Yoo 12 August, 2020
+https://devkimchi.com/2020/08/12/turning-raspberry-pi-into-remote-controller/
+
 ### Raspberry Pi IR Remote Control 2018, uses Go
 by Michael Traver
 https://github.com/mtraver/rpi-ir-remote
